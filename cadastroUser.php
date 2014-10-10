@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+	<?php include("include.php"); ?>
+</head>
+<body>
+<div id="container">
+    <header>
+		<div class="width">
+    		<h1><a href="#">BitS<img src="./img/soccer_sport-32.png">ccer</a></h1>
+		</div>
+    </header>
+    <nav>
+	<div class="width">
+    		<ul>
+        		<li><a href="index.php">Home</a></li>
+         	   	<li class="start selected"><a href="cadastroUser.php">Cadastre-se</a></li>
+          	  	<li class="end"><a href="login.php">Login</a></li>
+        	</ul>
+	</div>
+    </nav>
+
+
+    <div id="body" class="width">
+
+		
+
+		<section id="contentIndex">
+
+	    <article>
+			<h2> Cadastro de usuário:</h2>
+			<fieldset>
+                <legend>Formulário</legend>
+                <form action="#" method="POST" id="FrmCadastroCli">
+                    <p>
+						<label for="nome">Name:</label>
+						<input name="nome" id="nome"  type="text" size="80" required />
+					</p>
+					<p>
+						<label for="cpf">CPF:</label>
+						<input name="cpf" id="cpf"  type="text" size="14" maxlength="14" class="cpf" required/>
+					</p>
+					<p>
+						<label for="rg">RG:</label>
+						<input name="rg" id="rg"  type="text" size="14" maxlength="14"/ required>
+					</p>
+					<p>
+						<label for="nascimento">Nascimento:</label>
+						<input name="nascimento" id="nascimento"  type="date" required/>
+					</p>
+					<p>
+						<label for="email">E-mail para login:</label>
+						<input name="email" id="email"  type="email" size="25" required  onchange="form.checkEmail.pattern = this.value;"/>
+					</p>
+					<p>
+						<label for="checkEmail">Confirmar e-mail:</label>
+						<input name="checkEmail" id="checkEmail"  type="checkEmail" size="25"/>
+					</p>
+						<p>
+						<label for="senha">Senha:</label>
+						<input id="password" name="password" type="password" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" placeholder="Password" required>
+						</p>
+					<p>
+						<label for="checkSenha">Confirmar senha:</label>
+						<input id="password_two" name="password_two" type="password" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Please enter the same Password as above' : '');" placeholder="Verify Password" required>
+					</p>
+					<p>
+						<label for="cep">CEP:</label>
+						<input name="cep" id="cep"  type="cep" size="7" class="cep"/>
+						<img src="./img/search.png" alt="Procurar Endereço" title="Procurar Endereço" id="lupa" >
+					</p>
+					<p>
+						<label for="logradouro">Logradouro:</label>
+						<input name="logradouro" id="logradouro"  type="logradouro" size="25"/>
+					</p>
+					<p>
+						<label for="numero">Número:</label>
+						<input name="numero" id="numero"  type="numero" size="10"/>
+					</p>
+					
+					<p>
+						<label for="uf">Estado:</label>
+						<input name="estado" id="estado"  type="estado" size="7"/>
+					</p>
+					<p>
+						<label for="cidade">Cidade:</label>
+						<input name="cidade" id="cidade"  type="cidade" size="7"/>
+					</p>
+					<p>
+						<label for="bairro">Bairro:</label>
+						<input name="bairro" id="bairro"  type="bairro" size="7"/>
+					</p>
+                    <p><input name="send" style="margin-left: 150px;" class="formbutton" value="Cadastrar" type="submit" /></p>
+                </form>
+            </fieldset>
+		</article>
+        </section>
+    	<div class="clear"></div>
+    </div>
+    <footer>
+	    <div class="footer-bottom">
+            <p>UFPR - Tecnologia em Análise e Desenvolvimento de Sistemas - IAC</p>
+			<p> 
+				Desenvolvedores:
+				Ademilson Santana da Silva, 
+				Alberto Sussumu Kato Junior, 
+				Lucas dos Santos Canestraro.
+			</p>	
+        </div>
+    </footer>
+</div>
+</body>
+</html>
