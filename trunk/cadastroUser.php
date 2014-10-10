@@ -1,4 +1,15 @@
-<!doctype html>
+<?php
+require("./db/connection.php");
+require("./db/crud.php");
+require("./function/data.php");
+	if(isset($_POST["submit"])){
+		//Inserindo o comprador no banco
+		inserirComprador($_POST["nome"],$_POST["cpf"],$_POST["rg"],$_POST["nascimento"]);
+		inserirEndereco ($_POST["cep"],$_POST["logradouro"],$_POST["bairro"],$_POST["cidade"],$_POST["estado"],$_POST["numero"]);
+		
+	}
+
+?>
 <html>
 <head>
 	<?php include("include.php"); ?>
@@ -31,26 +42,26 @@
 			<h2> Cadastro de usuário:</h2>
 			<fieldset>
                 <legend>Formulário</legend>
-                <form action="#" method="POST" id="FrmCadastroCli">
+                <form action="cadastroUser.php" method="POST" id="FrmCadastroCli">
                     <p>
 						<label for="nome">Name:</label>
-						<input name="nome" id="nome"  type="text" size="80" required />
+						<input name="nome" id="nome"  type="text" size="80"  />
 					</p>
 					<p>
 						<label for="cpf">CPF:</label>
-						<input name="cpf" id="cpf"  type="text" size="14" maxlength="14" class="cpf" required/>
+						<input name="cpf" id="cpf"  type="text" size="14" maxlength="14" class="cpf" />
 					</p>
 					<p>
 						<label for="rg">RG:</label>
-						<input name="rg" id="rg"  type="text" size="14" maxlength="14"/ required>
+						<input name="rg" id="rg"  type="text" size="14" maxlength="14"/ >
 					</p>
 					<p>
 						<label for="nascimento">Nascimento:</label>
-						<input name="nascimento" id="nascimento"  type="date" required/>
+						<input name="nascimento" id="nascimento"  type="date" />
 					</p>
 					<p>
 						<label for="email">E-mail para login:</label>
-						<input name="email" id="email"  type="email" size="25" required  onchange="form.checkEmail.pattern = this.value;"/>
+						<input name="email" id="email"  type="email" size="25"   onchange="form.checkEmail.pattern = this.value;"/>
 					</p>
 					<p>
 						<label for="checkEmail">Confirmar e-mail:</label>
@@ -58,11 +69,11 @@
 					</p>
 						<p>
 						<label for="senha">Senha:</label>
-						<input id="password" name="password" type="password" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" placeholder="Password" required>
+						<input id="password" name="password" type="password" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" placeholder="Password" >
 						</p>
 					<p>
 						<label for="checkSenha">Confirmar senha:</label>
-						<input id="password_two" name="password_two" type="password" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Please enter the same Password as above' : '');" placeholder="Verify Password" required>
+						<input id="password_two" name="password_two" type="password" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Please enter the same Password as above' : '');" placeholder="Verify Password" >
 					</p>
 					<p>
 						<label for="cep">CEP:</label>
@@ -90,7 +101,7 @@
 						<label for="bairro">Bairro:</label>
 						<input name="bairro" id="bairro"  type="bairro" size="7"/>
 					</p>
-                    <p><input name="send" style="margin-left: 150px;" class="formbutton" value="Cadastrar" type="submit" /></p>
+                    <p><input name="submit" style="margin-left: 150px;" class="formbutton" value="Cadastrar" type="submit" /></p>
                 </form>
             </fieldset>
 		</article>
