@@ -3,10 +3,11 @@ require("./db/connection.php");
 require("./db/crud.php");
 require("./function/data.php");
 	if(isset($_POST["submit"])){
-		//Inserindo o comprador no banco
+	
+		//Inserindo nas tabelas Comprador,Enderço,Usuário. A associação entre as tabelas é dada pelo idComprador. 
 		inserirComprador($_POST["nome"],$_POST["cpf"],$_POST["rg"],$_POST["nascimento"]);
 		inserirEndereco ($_POST["cep"],$_POST["logradouro"],$_POST["bairro"],$_POST["cidade"],$_POST["estado"],$_POST["numero"]);
-		
+		inserirUsuario($_POST["email"],$_POST["password"]);
 	}
 
 ?>
@@ -60,17 +61,13 @@ require("./function/data.php");
 						<input name="nascimento" id="nascimento"  type="date" />
 					</p>
 					<p>
-						<label for="email">E-mail para login:</label>
+						<label for="email">E-mail:</label>
 						<input name="email" id="email"  type="email" size="25"   onchange="form.checkEmail.pattern = this.value;"/>
 					</p>
 					<p>
-						<label for="checkEmail">Confirmar e-mail:</label>
-						<input name="checkEmail" id="checkEmail"  type="checkEmail" size="25"/>
-					</p>
-						<p>
 						<label for="senha">Senha:</label>
 						<input id="password" name="password" type="password" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" placeholder="Password" >
-						</p>
+					</p>
 					<p>
 						<label for="checkSenha">Confirmar senha:</label>
 						<input id="password_two" name="password_two" type="password" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Please enter the same Password as above' : '');" placeholder="Verify Password" >

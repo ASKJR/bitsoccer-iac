@@ -8,27 +8,7 @@ function inserirComprador($nome,$cpf,$rg,$nascimento){
 	
 	$sql  = "INSERT INTO comprador ";
 	$sql .= "(nome,cpf,rg,nascimento) ";
-	$sql .= "VALUES ('$nome','$cpf','$rg','$nascimento') ";
-	
-	$Execute = mysqli_query($conn,$sql);
-	
-	if($Execute === false){
-		echo 'error - ';
-		echo mysqli_error($conn);
-	}
-	else{
-		echo "SUCESS";
-	}
-}
-
-function inserirEndereco($cep,$logradouro,$bairro,$cidade,$estado,$numero){
-	
-	global $conn;
-	
-	$last_id_comprador = selectLastIdComprador();
-	$sql  = "INSERT INTO endereco ";   
-	$sql .= "(idComprador,cep,logradouro,bairro,cidade,estado,numero) ";
-	$sql .= "VALUES ($last_id_comprador,'$cep','$logradouro','$bairro','$cidade','$estado',$numero) ";
+	$sql .= "VALUES ('$nome','$cpf','$rg','$nascimento');";
 	
 	$Execute = mysqli_query($conn,$sql);
 	
@@ -39,6 +19,48 @@ function inserirEndereco($cep,$logradouro,$bairro,$cidade,$estado,$numero){
 	else{
 		//echo "SUCESS";
 	}
+}
+
+function inserirEndereco($cep,$logradouro,$bairro,$cidade,$estado,$numero){
+	
+	global $conn;
+	
+	$last_id_comprador = selectLastIdComprador();
+	$sql  = "INSERT INTO endereco ";   
+	$sql .= "(idComprador,cep,logradouro,bairro,cidade,estado,numero) ";
+	$sql .= "VALUES ($last_id_comprador,'$cep','$logradouro','$bairro','$cidade','$estado',$numero);";
+	
+	$Execute = mysqli_query($conn,$sql);
+	
+	if($Execute === false){
+		echo 'error - ';
+		echo mysqli_error($conn);
+	}
+	else{
+		//echo "SUCESS";
+	}
+}
+
+function inserirUsuario($login,$senha){
+	
+	global $conn;
+	
+	$password = md5($senha);
+	$last_id_comprador = selectLastIdComprador();
+	$sql  = "INSERT INTO usuario ";
+	$sql .= "(idComprador,login,senha) ";
+	$sql .= "VALUES ($last_id_comprador,'$login','$password');";
+	
+	$Execute = mysqli_query($conn,$sql);
+	
+	if($Execute === false){
+		echo 'error - ';
+		echo mysqli_error($conn);
+	}
+	else{
+		//echo "SUCESS";
+	}
+
 }
 
 //----------------------------UPDATE----------------------------
