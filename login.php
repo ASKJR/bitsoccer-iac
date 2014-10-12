@@ -31,14 +31,14 @@
 			<h2> Login:</h2>
 			<fieldset>
                 <legend>Formulário</legend>
-                <form action="#" method="POST">
+                <form action="#" method="POST" id="formLogin">
                     <p>
 						<label for="login">E-mail:</label>
-						<input name="login" id="login"  type="text" size="45" />
+						<input class="validate[required,custom[email]]" name="login" id="login"  type="text" size="45" />
 					</p>
 					<p>
 						<label for="senha">Senha:</label>
-						<input name="senha" id="senha"  type="password" size="45" />
+						<input class="validate[required]" name="senha" id="senha"  type="password" size="45" />
 					</p>
                     <p>
 						<input name="send" style="margin-left: 150px;" class="formbutton" value="Entrar" type="submit" />

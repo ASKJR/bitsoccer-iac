@@ -42,37 +42,37 @@ require("./function/data.php");
 	    <article>
 			<h2> Cadastro do usuário:</h2>
 			<br>
-			<form action="cadastroUser.php" method="POST" id="FrmCadastroCli">
+			<form action="cadastroUser.php" method="POST" id="formCadastroUser">
 				<fieldset>
 					<legend>Dados pessoais:</legend>
 					<br>
 						<p>
 							<label for="nome">Nome:</label>
-							<input name="nome" id="nome"  type="text" size="80"  />
+							<input class="validate[required]" name="nome" id="nome"  type="text" size="80"  />
 						</p>
 						<p>
 							<label for="cpf">CPF:</label>
-							<input name="cpf" id="cpf"  type="text" size="14" maxlength="14" class="cpf" />
+							<input class="validate[required]" name="cpf" id="cpf"  type="text" size="14" maxlength="14" class="cpf" />
 						</p>
 						<p>
 							<label for="rg">RG:</label>
-							<input name="rg" id="rg"  type="text" size="14" maxlength="14"/ >
+							<input class="validate[required]" name="rg" id="rg"  type="text" size="14" maxlength="14"/ >
 						</p>
 						<p>
 							<label for="nascimento">Nascimento:</label>
-							<input name="nascimento" id="nascimento"  type="date" />
+							<input class="validate[required]" name="nascimento" id="nascimento"  type="date" />
 						</p>
 						<p>
 							<label for="email">E-mail:</label>
-							<input name="email" id="email"  type="email" size="35"/>
+							<input class="validate[required,custom[email]]"  type="text" name="email" id="email" size="35"/>
 						</p>
 						<p>
 							<label for="senha">Senha:</label>
-							<input id="password" name="password" type="password" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" placeholder="Password" >
+							<input class="validate[required]" id="password" name="password" type="password"/>
 						</p>
 						<p>
 							<label for="checkSenha">Confirmar senha:</label>
-							<input id="password_two" name="password_two" type="password" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Please enter the same Password as above' : '');" placeholder="Verify Password" >
+							<input class="validate[required,equals[password]]" id="password_two" name="password_two" type="password"/>
 						</p>
 						<br>
 				</fieldset>
@@ -81,29 +81,29 @@ require("./function/data.php");
 						<br>
 						<p>
 							<label for="cep">CEP:</label>
-							<input name="cep" id="cep"  type="cep" size="7" class="cep"/>
+							<input class="validate[required] cep" name="cep" id="cep"  type="cep" size="7"/>
 							<img src="./img/search.png" alt="Procurar Endereço" title="Procurar Endereço" id="lupa" >
 						</p>
 						<p>
 							<label for="logradouro">Logradouro:</label>
-							<input name="logradouro" id="logradouro"  type="logradouro" size="50"/>
+							<input class="validate[required]" name="logradouro" id="logradouro"  type="logradouro" size="50"/>
 						</p>
 						<p>
 							<label for="numero">Número:</label>
-							<input name="numero" id="numero"  type="numero" size="10" class="num"/>
+							<input class="validate[required] num" name="numero" id="numero"  type="numero" size="10" />
 						</p>
 						
 						<p>
 							<label for="uf">Estado:</label>
-							<input name="estado" id="estado"  type="estado" size="2" maxlength="2"/>
+							<input class="validate[required]" name="estado" id="estado"  type="estado" size="2" maxlength="2"/>
 						</p>
 						<p>
 							<label for="cidade">Cidade:</label>
-							<input name="cidade" id="cidade"  type="cidade" size="25"/>
+							<input class="validate[required]" name="cidade" id="cidade"  type="cidade" size="25"/>
 						</p>
 						<p>
 							<label for="bairro">Bairro:</label>
-							<input name="bairro" id="bairro"  type="bairro" size="25"/>
+							<input class="validate[required]" name="bairro" id="bairro"  type="bairro" size="25"/>
 						</p>
 						<p><input name="submit" style="margin-left: 150px;" class="formbutton" value="Cadastrar" type="submit" /></p>
 				</fieldset>
