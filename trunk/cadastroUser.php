@@ -68,7 +68,7 @@ require("./function/data.php");
 						</p>
 						<p>
 							<label for="senha">Senha:</label>
-							<input class="validate[required]" id="password" name="password" type="password"/>
+							<input class="validate[required,minSize[6]]" id="password" name="password" type="password"/>
 						</p>
 						<p>
 							<label for="checkSenha">Confirmar senha:</label>
