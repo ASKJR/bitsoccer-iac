@@ -17,8 +17,8 @@
     <nav>
 	<div class="width">
   		  <ul>
-        		<li><a href="compradorHome.html">Home</a></li>
-         	   	<li><a href="compradorPesquisa.html">Pesquisa</a></li>
+        		<li><a href="adminHome.php">Home</a></li>
+         	   	<li><a href="adminPesquisa.php">Pesquisa</a></li>
           	 	<li class="end"><a href="#">Logout</a></li>
         	</ul>
 	</div>
@@ -29,37 +29,36 @@
         <section id="content">
 
 			<article>
-				<h2>Jogo sorteado</h2>
-				<br>
-				<p>Parabéns você foi sorteado para o seguinte jogo:</p>
-				<table cellspacing="0">
-					<tr>
-						<th>Time 1</th>
-						<th>Time 2</th>
-						<th>Local</th>
-						<th>Data</th>
-						<th>Comprovante</th>
-					</tr>
-					<tr>
-						<td>Brazil</td>
-						<td>Argentina</td>
-						<td>Curitiba</td>
-						<td>08/10/2014</td>
-						<td><img src="../img/printer-icon.png" alt="Imprimir" title="Imprimir"></td>
-					</tr>
-				</table>
+				<h2>Cadastrar time</h2>
+				<fieldset>
+                <legend>Formulário</legend>
+					<form action="#" method="POST" enctype="multipart/form-data">
+						<p>
+							<label for="selecao">Nome da seleção:</label>
+							<input name="selecao" id="selecao"  type="text" size="42" />
+						</p>
+						<p>
+							<label for="bandeira">Bandeira:</label>
+							<input type="file" name="picBandeira">
+						</p>
+						<p>
+							<input name="cadastrar" style="margin-left: 150px;" class="formbutton" value="Cadastrar" type="submit" />
+						</p>	
+					</form>
+				</legend>
 			</article>
         </section>
         <aside class="sidebar">
 
-          
            <ul>	
                <li>
-                    <h4>Opções Comprador</h4>
+                    <h4>Opções Administrador</h4>
                     <ul>
-                        <li><a href="compradorAlterarCadastro.html">Alterar Dados</li>
-                        <li><a href="compradorJogosConcorrendo.html">Jogos que estou concorrendo</a></li>
-                        <li><a href="compradorJogoSorteado.html">Jogo sorteado</a></li>
+                        <li><a href="adminDeleteUpdateCliente.php">Alterar/Excluir Cliente</li>
+                        <li><a href="adminCadastroJogo.php">Cadastrar jogo</a></li>
+                        <li><a href="adminCadastroTime.php">Cadastrar time</a></li>
+                        <li><a href="adminSortearJogo.php">Sortear jogo</a></li>
+						<li><a href="adminRel.php">Relatórios</a></li>
                     </ul>
                 </li>
             </ul>

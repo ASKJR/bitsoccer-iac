@@ -17,8 +17,8 @@
     <nav>
 	<div class="width">
   		  <ul>
-        		<li><a href="adminHome.html">Home</a></li>
-         	   	<li><a href="adminPesquisa.html">Pesquisa</a></li>
+        		<li><a href="compradorHome.php">Home</a></li>
+         	   	<li class="start selected"><a href="compradorPesquisa.php">Pesquisa</a></li>
           	 	<li class="end"><a href="#">Logout</a></li>
         	</ul>
 	</div>
@@ -29,44 +29,36 @@
         <section id="content">
 
 			<article>
-				<h2>Sortear Jogo</h2>
+				<h2>Pesquisa</h2>
 				<fieldset>
-                <legend>Formulário</legend>
+					<legend>Search</legend>
 					<form action="#" method="POST">
 						<p>
-							<label for="selectJogo">Selecione o jogo:</label>
-							<select name="selectJogo" id="selectJogo">
-								<option> </option>
-								<option>Time1 X Time2</option>
-								<option>Time1 X Time3</option>
-							</select>
+							<label class="lbSearch">Jogos não sorteados:</label>
+							<input name="tipPesq"   type="radio"/>
 						</p>
 						<p>
-							<label for="qtdSorteio">Qtd. para sortear:</label>
-							<input name="qtdSorteio" id="qtdSorteio"  type="number"/>
+							<label class="lbSearch">Jogos já sorteados:</label>
+							<input name="tipPesq"   type="radio"/>
 						</p>
 						<p>
-							<input name="sortear" style="margin-left: 150px;" class="formbutton" value="Sortear" type="submit" />
+							<input name="pesquisar" style="margin-left: 150px;" class="formbutton" value="Pesquisar" type="submit" />
 						</p>
 					</form>
 				</fieldset>
 			</article>
         </section>
         <aside class="sidebar">
-
            <ul>	
                <li>
-                    <h4>Opções Administrador</h4>
+                    <h4>Opções Comprador</h4>
                     <ul>
-                        <li><a href="adminDeleteUpdateCliente.html">Alterar/Excluir Cliente</li>
-                        <li><a href="adminCadastroJogo.html">Cadastrar jogo</a></li>
-                        <li><a href="adminCadastroTime.html">Cadastrar time</a></li>
-                        <li><a href="adminSortearJogo.html">Sortear jogo</a></li>
-						<li><a href="adminRel.html">Relatórios</a></li>
+                        <li><a href="compradorAlterarCadastro.php">Alterar Dados</li>
+                        <li><a href="compradorJogosConcorrendo.php">Jogos que estou concorrendo</a></li>
+                        <li><a href="compradorJogoSorteado.php">Jogo sorteado</a></li>
                     </ul>
                 </li>
             </ul>
-		
         </aside>
     	<div class="clear"></div>
     </div>

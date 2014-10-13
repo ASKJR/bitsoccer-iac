@@ -17,8 +17,8 @@
     <nav>
 	<div class="width">
   		  <ul>
-        		<li><a href="adminHome.html">Home</a></li>
-         	   	<li class="start selected"><a href="adminPesquisa.html">Pesquisa</a></li>
+        		<li><a href="adminHome.php">Home</a></li>
+         	   	<li class="start selected"><a href="adminPesquisa.php">Pesquisa</a></li>
           	 	<li class="end"><a href="#">Logout</a></li>
         	</ul>
 	</div>
@@ -68,11 +68,11 @@
                <li>
                     <h4>Opções Administrador</h4>
                     <ul>
-                        <li><a href="adminDeleteUpdateCliente.html">Alterar/Excluir Cliente</li>
-                        <li><a href="adminCadastroJogo.html">Cadastrar jogo</a></li>
-                        <li><a href="adminCadastroTime.html">Cadastrar time</a></li>
-                        <li><a href="adminSortearJogo.html">Sortear jogo</a></li>
-						<li><a href="adminRel.html">Relatórios</a></li>
+                        <li><a href="adminDeleteUpdateCliente.php">Alterar/Excluir Cliente</li>
+                        <li><a href="adminCadastroJogo.php">Cadastrar jogo</a></li>
+                        <li><a href="adminCadastroTime.php">Cadastrar time</a></li>
+                        <li><a href="adminSortearJogo.php">Sortear jogo</a></li>
+						<li><a href="adminRel.php">Relatórios</a></li>
                     </ul>
                 </li>
             </ul>

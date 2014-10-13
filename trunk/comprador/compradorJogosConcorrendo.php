@@ -17,8 +17,8 @@
     <nav>
 	<div class="width">
   		  <ul>
-        		<li><a href="compradorHome.html">Home</a></li>
-         	   	<li><a href="compradorPesquisa.html">Pesquisa</a></li>
+        		<li><a href="compradorHome.php">Home</a></li>
+         	   	<li><a href="compradorPesquisa.php">Pesquisa</a></li>
           	 	<li class="end"><a href="#">Logout</a></li>
         	</ul>
 	</div>
@@ -76,9 +76,9 @@
                <li>
                     <h4>Opções Comprador</h4>
                     <ul>
-                        <li><a href="compradorAlterarCadastro.html">Alterar Dados</li>
-                        <li><a href="compradorJogosConcorrendo.html">Jogos que estou concorrendo</a></li>
-                        <li><a href="compradorJogoSorteado.html">Jogo sorteado</a></li>
+                        <li><a href="compradorAlterarCadastro.php">Alterar Dados</li>
+                        <li><a href="compradorJogosConcorrendo.php">Jogos que estou concorrendo</a></li>
+                        <li><a href="compradorJogoSorteado.php">Jogo sorteado</a></li>
                     </ul>
                 </li>
             </ul>
