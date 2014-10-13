@@ -52,7 +52,7 @@ require("./function/data.php");
 						</p>
 						<p>
 							<label for="cpf">CPF:</label>
-							<input class="validate[required]" name="cpf" id="cpf"  type="text" size="14" maxlength="14" class="cpf" />
+							<input class="validate[required] cpf" name="cpf" id="cpf"  type="text" size="14" maxlength="14" class="cpf" />
 						</p>
 						<p>
 							<label for="rg">RG:</label>
