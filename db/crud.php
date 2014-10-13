@@ -67,8 +67,15 @@ function inserirUsuario($login,$senha){
 
 //----------------------------DELETE----------------------------
 
+
+
+
+
+
 //----------------------------SELECT----------------------------
+
 //Buscar ultimo id inserido
+
 function selectLastIdComprador(){
 	
 	global $conn;
@@ -82,5 +89,51 @@ function selectLastIdComprador(){
     }
 }
 
+//Verifica a validade do login
+
+function loginValidation($email,$senha){
+	
+	global $conn;
+	
+	//codificando a senha para comparação
+	$password = md5($senha);
+	
+	$sql  = "SELECT * FROM usuario ";
+	$sql .= "WHERE login = '$email' ";
+	$sql .= "AND   senha = '$password'; ";
+	
+	if ($result = mysqli_query($conn, $sql)) {
+		$row_cnt = mysqli_num_rows($result);
+		//Caso a busca retorne exatamente uma linha. Como consequência existe o usuário selecionado no BD
+		if($row_cnt == 1){
+		
+			//iniciando a sessão
+			session_start();
+			
+			$_SESSION["time"] =  date('d/m/Y H:i:s');
+			
+			$row = mysqli_fetch_assoc($result);
+			
+			//Se o id do comprador na tabela de usuário for null,então o usuário é administrador
+			if($row["idComprador"] == null){
+				$_SESSION["usuario"] = "admin";
+				$_SESSION["email_admin"] = $row["login"];
+			}
+			//Caso contrário o usuário é um comprador
+			else{
+				$_SESSION["usuario"] = "comprador";
+				$_SESSION["idComprador"] = $row["idComprador"];
+			}
+			//Login realizado com sucesso
+			return true;
+		}
+		else{
+			//Login falhou
+			return false;
+		}
+	}
+}
+
+//--------------------------------------------------------------
 
 ?>

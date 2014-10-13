@@ -1,4 +1,32 @@
-<!doctype html>
+<?php
+require("./db/connection.php");
+require("./db/crud.php");
+require("./function/mensagens.php");
+	
+	$loginFail=false;
+	
+	if(isset($_POST["submit"])){
+		if($_POST["email"] != "" && $_POST["senha"] != ""){
+			//Validando o login do usuário no sistema; Caso retorne true sucesso
+			if(loginValidation(trim($_POST["email"]),trim($_POST["senha"]))){
+				//caso o usuário seja administrado
+				if($_SESSION["usuario"] == "admin"){
+					header("Location: /admin/adminHome.php");
+					exit;
+				}
+				else if($_SESSION["usuario"] == "comprador"){
+					header("Location: /comprador/compradorHome.php");
+					exit;
+				}
+			}
+			//Login falhou.
+			else{
+				$loginFail=true;
+			}
+		}
+	}
+
+?>
 <html>
 <head>
 	<?php include("include.php"); ?>
@@ -31,17 +59,17 @@
 			<h2> Login:</h2>
 			<fieldset>
                 <legend>Formulário</legend>
-                <form action="#" method="POST" id="formLogin">
+                <form action="login.php" method="POST" id="formLogin">
                     <p>
 						<label for="login">E-mail:</label>
-						<input class="validate[required,custom[email]]" name="login" id="login"  type="text" size="45" />
+						<input class="validate[required,custom[email]]" name="email" id="email"  type="text" size="45" />
 					</p>
 					<p>
 						<label for="senha">Senha:</label>
 						<input class="validate[required]" name="senha" id="senha"  type="password" size="45" />
 					</p>
                     <p>
-						<input name="send" style="margin-left: 150px;" class="formbutton" value="Entrar" type="submit" />
+						<input name="submit" style="margin-left: 150px;" class="formbutton" value="Entrar" type="submit" />
 					</p>
                 </form>
             </fieldset>
@@ -63,3 +91,11 @@
 </div>
 </body>
 </html>
+
+<?php
+	//Sinaliza com um alert de erro no login
+	if($loginFail){
+		loginFailAlert();
+		exit;
+	} 
+?>
