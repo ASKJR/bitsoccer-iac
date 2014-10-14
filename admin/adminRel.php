@@ -1,11 +1,7 @@
 <!doctype html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>bitsoccer</title>
-<link rel="stylesheet" href="../css/styles.css" type="text/css" />
-<link rel="shortcut icon" href="../img/soccer.ico">
-<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+<?php include("../include.php"); ?>
 </head>
 <body>
 <div id="container">

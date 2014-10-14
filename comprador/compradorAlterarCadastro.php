@@ -1,11 +1,7 @@
 <!doctype html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>bitsoccer</title>
-<link rel="stylesheet" href="../css/styles.css" type="text/css" />
-<link rel="shortcut icon" href="../img/soccer.ico">
-<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+<?php include("../include.php"); ?>
 </head>
 <body>
 <div id="container">
@@ -29,65 +25,74 @@
         <section id="content">
 
 			<article>
-				<h2>Alterar dados</h2>
-				<br>
+				<h2> Cadastro do usuário:</h2>
+			<br>
+			<form action="cadastroUser.php" method="POST" id="formCadastroUser">
 				<fieldset>
-                <legend>Formulário</legend>
-                <form action="#" method="POST">
-                    <p>
-						<label for="nome">Name:</label>
-						<input name="nome" id="nome"  type="text" size="50" />
-					</p>
-					<p>
-						<label for="cpf">CPF:</label>
-						<input name="cpf" id="cpf"  type="text" size="14" maxlength="14"/>
-					</p>
-					<p>
-						<label for="rg">RG:</label>
-						<input name="rg" id="rg"  type="text" size="14" maxlength="14"/>
-					</p>
-					<p>
-						<label for="nascimento">Nascimento:</label>
-						<input name="nascimento" id="nascimento"  type="date"/>
-					</p>
-					<p>
-						<label for="email">E-mail para login:</label>
-						<input name="email" id="email"  type="email" size="25"/>
-					</p>
-					<p>
-						<label for="senha">Senha:</label>
-						<input name="senha" id="senha"  type="password" size="25"/>
-					</p>
-					<p>
-						<label for="cep">CEP:</label>
-						<input name="cep" id="cep"  type="cep" size="7"/>
-					</p>
-					<p>
-						<label for="logradouro">Logradouro:</label>
-						<input name="logradouro" id="logradouro"  type="logradouro" size="25"/>
-					</p>
-					<p>
-						<label for="numero">Número:</label>
-						<input name="numero" id="numero"  type="numero" size="10"/>
-					</p>
-					
-					<p>
-						<label for="uf">Estado:</label>
-						<input name="estado" id="estado"  type="estado" size="7"/>
-					</p>
-					<p>
-						<label for="cidade">Cidade:</label>
-						<input name="cidade" id="cidade"  type="cidade" size="7"/>
-					</p>
-					<p>
-						<label for="bairro">Bairro:</label>
-						<input name="bairro" id="bairro"  type="bairro" size="7"/>
-					</p>
-                    <p>
-						<input name="alterar" style="margin-left: 150px;" class="formbutton" value="Alterar" type="submit" />
-					</p>
-                </form>
-            </fieldset>
+					<legend>Dados pessoais:</legend>
+					<br>
+						<p>
+							<label for="nome">Nome:</label>
+							<input class="validate[required]" name="nome" id="nome"  type="text" size="60"  />
+						</p>
+						<p>
+							<label for="cpf">CPF:</label>
+							<input class="validate[required] cpf" name="cpf" id="cpf"  type="text" size="14" maxlength="14" class="cpf" />
+						</p>
+						<p>
+							<label for="rg">RG:</label>
+							<input class="validate[required]" name="rg" id="rg"  type="text" size="14" maxlength="14"/ >
+						</p>
+						<p>
+							<label for="nascimento">Nascimento:</label>
+							<input class="validate[required]" name="nascimento" id="nascimento"  type="date" />
+						</p>
+						<p>
+							<label for="email">E-mail:</label>
+							<input class="validate[required,custom[email]]"  type="text" name="email" id="email" size="35"/>
+						</p>
+						<p>
+							<label for="senha">Senha:</label>
+							<input class="validate[required,minSize[6]]" id="password" name="password" type="password"/>
+						</p>
+						<p>
+							<label for="checkSenha">Confirmar senha:</label>
+							<input class="validate[required,equals[password]]" id="password_two" name="password_two" type="password"/>
+						</p>
+						<br>
+				</fieldset>
+				<fieldset>
+						<legend>Endereço:</legend>
+						<br>
+						<p>
+							<label for="cep">CEP:</label>
+							<input class="validate[required] cep" name="cep" id="cep"  type="cep" size="7"/>
+							<img src="../img/search.png" alt="Procurar Endereço" title="Procurar Endereço" id="lupa" >
+						</p>
+						<p>
+							<label for="logradouro">Logradouro:</label>
+							<input class="validate[required]" name="logradouro" id="logradouro"  type="logradouro" size="50"/>
+						</p>
+						<p>
+							<label for="numero">Número:</label>
+							<input class="validate[required] num" name="numero" id="numero"  type="numero" size="10" />
+						</p>
+						
+						<p>
+							<label for="uf">Estado:</label>
+							<input class="validate[required]" name="estado" id="estado"  type="estado" size="2" maxlength="2"/>
+						</p>
+						<p>
+							<label for="cidade">Cidade:</label>
+							<input class="validate[required]" name="cidade" id="cidade"  type="cidade" size="25"/>
+						</p>
+						<p>
+							<label for="bairro">Bairro:</label>
+							<input class="validate[required]" name="bairro" id="bairro"  type="bairro" size="25"/>
+						</p>
+						<p><input name="submit" style="margin-left: 150px;" class="formbutton" value="Alterar" type="submit" /></p>
+				</fieldset>
+			</form>
 			</article>
         </section>
         <aside class="sidebar">
