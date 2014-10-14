@@ -8,7 +8,6 @@
 <script src="./js/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js"></script>
 <script src="./js/calendariobr.js"></script>
 <script src="./js/jquery.mask.min.js"></script>
-<script src="./js/jquery.validate.min.js"></script>
 <script src="./js/cadastroUser.js"></script>
 <script src="./js/login.js"></script>
 <script src="./js/jquery.validationEngine-pt_BR.js"></script>
