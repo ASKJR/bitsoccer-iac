@@ -2,12 +2,27 @@
 require("./db/connection.php");
 require("./db/crud.php");
 require("./function/data.php");
-	if(isset($_POST["submit"])){
+require("./function/validation.php");
+require("./function/mensagens.php");
 	
-		//Inserindo nas tabelas Comprador,Enderço,Usuário. A associação entre as tabelas é dada pelo idComprador. 
-		inserirComprador($_POST["nome"],$_POST["cpf"],$_POST["rg"],$_POST["nascimento"]);
-		inserirEndereco ($_POST["cep"],$_POST["logradouro"],$_POST["bairro"],$_POST["cidade"],$_POST["estado"],$_POST["numero"]);
-		inserirUsuario($_POST["email"],$_POST["password"]);
+	$sucess="";
+	
+	if(isset($_POST["submit"])){
+		$required = array(
+			$_POST["nome"],$_POST["cpf"],$_POST["rg"],$_POST["nascimento"],
+			$_POST["cep"],$_POST["logradouro"],$_POST["bairro"],$_POST["cidade"],$_POST["estado"],$_POST["numero"],
+			$_POST["email"],$_POST["password"]
+		);
+		if(isFormValido($required)){
+			//Inserindo nas tabelas Comprador,Enderço,Usuário. A associação entre as tabelas é dada pelo idComprador.	
+			inserirComprador($_POST["nome"],$_POST["cpf"],$_POST["rg"],$_POST["nascimento"]);
+			inserirEndereco ($_POST["cep"],$_POST["logradouro"],$_POST["bairro"],$_POST["cidade"],$_POST["estado"],$_POST["numero"]);
+			inserirUsuario($_POST["email"],$_POST["password"]);
+			$sucess = true;
+		}
+		else{
+			$sucess = false;
+		}
 	}
 
 ?>
@@ -126,3 +141,14 @@ require("./function/data.php");
 </div>
 </body>
 </html>
+
+<?php 
+	if($sucess===true){
+		cadastroSucessAlert();
+		exit;
+	}
+	else if($sucess===false){
+		cadastroFailAlert();
+		exit;
+	}
+?>
