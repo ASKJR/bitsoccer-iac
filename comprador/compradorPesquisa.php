@@ -12,11 +12,7 @@
     </header>
     <nav>
 	<div class="width">
-  		  <ul>
-        		<li><a href="compradorHome.php">Home</a></li>
-         	   	<li class="start selected"><a href="compradorPesquisa.php">Pesquisa</a></li>
-          	 	<li class="end"><a href="#">Logout</a></li>
-        	</ul>
+		<?php include("compradorMenuTop.php") ?>
 	</div>
     </nav>
 
@@ -45,29 +41,12 @@
 			</article>
         </section>
         <aside class="sidebar">
-           <ul>	
-               <li>
-                    <h4>Opções Comprador</h4>
-                    <ul>
-                        <li><a href="compradorAlterarCadastro.php">Alterar Dados</li>
-                        <li><a href="compradorJogosConcorrendo.php">Jogos que estou concorrendo</a></li>
-                        <li><a href="compradorJogoSorteado.php">Jogo sorteado</a></li>
-                    </ul>
-                </li>
-            </ul>
+			<?php include("compradorMenu.php") ?>
         </aside>
     	<div class="clear"></div>
     </div>
     <footer>
-		<div class="footer-bottom">
-		  <p>UFPR - Tecnologia em Análise e Desenvolvimento de Sistemas - IAC</p>
-			<p> 
-				Desenvolvedores:
-				Ademilson Santana da Silva, 
-				Alberto Sussumu Kato Junior, 
-				Lucas dos Santos Canestraro.
-			</p>
-		</div>
+		<?php include("../footer.php") ?>
     </footer>
 </div>
 </body>
