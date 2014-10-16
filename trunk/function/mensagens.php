@@ -18,5 +18,18 @@
 			alert('Não foi possível realizar seu cadastro.');
 		</script>";
 	}
+	function updateCompradorSucess(){
+		echo
+		"<script>
+			alert('Dados alterados com sucesso.');
+		</script>";
+	}
+	function updateCompradorFail(){
+		echo
+		"<script>
+			alert('Não foi possível alterar seus dados.');
+		</script>";
+	}
+	
 	
 ?>
