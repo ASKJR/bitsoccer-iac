@@ -134,6 +134,29 @@ function loginValidation($email,$senha){
 	}
 }
 
+//Busca um comprador por id
+
+function selectCompradorById($idComprador){
+	
+	global $conn;
+	
+	$sql   = "SELECT a.*,b.*,c.login ";
+	$sql  .= "FROM comprador a ";
+	$sql  .= "INNER JOIN endereco b ON  (a.idComprador = b.idComprador) ";
+	$sql  .= "INNER JOIN usuario c ON (a.idComprador = c.idComprador) ";
+	$sql  .= "WHERE a.idComprador = '$idComprador'; ";
+	
+	if ($result = mysqli_query($conn, $sql)) {
+		
+		$row = mysqli_fetch_assoc($result);
+		
+		return $row;
+	}
+	else{
+		die('Invalid query: ' . mysql_error());
+	}
+}
+
 //--------------------------------------------------------------
 
 ?>

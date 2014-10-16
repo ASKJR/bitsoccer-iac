@@ -11,13 +11,7 @@
 	</div>
     </header>
     <nav>
-	<div class="width">
-  		  <ul>
-        		<li><a href="adminHome.php">Home</a></li>
-         	   	<li class="start selected"><a href="adminPesquisa.php">Pesquisa</a></li>
-          	 	<li class="end"><a href="#">Logout</a></li>
-        	</ul>
-	</div>
+		<?php include("adminMenuTop.php"); ?>
     </nav>
 
     <div id="body" class="width">
