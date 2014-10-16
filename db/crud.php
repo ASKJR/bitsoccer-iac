@@ -63,7 +63,83 @@ function inserirUsuario($login,$senha){
 
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 //----------------------------UPDATE----------------------------
+
+function atualizarComprador($idComprador,$nome,$cpf,$rg,$nascimento){
+	
+	global $conn;
+	
+	$sql  = "UPDATE comprador ";
+	$sql .= "SET nome 			= '$nome'";
+	$sql .= "SET cpf  			= '$cpf' ";
+	$sql .= "SET rg   			= '$rg'  ";
+	$sql .= "SET nascimento   	= '$nascimento' ";
+	$sql .= "WHERE idComprador 	=  $idComprador; ";
+	
+	$Execute = mysqli_query($conn,$sql);
+	
+	if($Execute === false){
+		echo 'error - ';
+		echo mysqli_error($conn);
+	}
+
+}
+
+function atualizarEndereco($idComprador,$cep,$logradouro,$bairro,$cidade,$estado,$numero){
+	
+	global $conn;
+	
+	$sql  = "UPDATE endereco ";
+	$sql .= "SET cep 			= '$cep'          ";
+	$sql .= "SET logradouro  	= '$logradouro'   ";
+	$sql .= "SET bairro   		= '$bairro'       ";
+	$sql .= "SET cidade   		= '$cidade'       ";
+	$sql .= "SET estado 		= '$estado'       ";
+	$sql .= "SET numero 		=  $numero        ";
+	$sql .= "WHERE idComprador 	=  $idComprador;  ";
+	
+	$Execute = mysqli_query($conn,$sql);
+	
+	if($Execute === false){
+		echo 'error - ';
+		echo mysqli_error($conn);
+	}
+}
+
+function atualizarUsuario($idComprador,$login){
+
+	global $conn;
+	
+	$sql  = "UPDATE usuario ";
+	$sql .= "SET login         = '$login' ";
+	$sql .= "WHERE idComprador =  $idComprador; ";
+	
+	$Execute = mysqli_query($conn,$sql);
+	
+	if($Execute === false){
+		echo 'error - ';
+		echo mysqli_error($conn);
+	}
+}
+//--------------------------------------------------------------
+
+
+
+
+
 
 //----------------------------DELETE----------------------------
 

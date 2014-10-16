@@ -7,3 +7,7 @@
 		Lucas dos Santos Canestraro.
 	</p>
 </div>
+<?php
+global $conn; 
+mysqli_close($conn); 
+?>
