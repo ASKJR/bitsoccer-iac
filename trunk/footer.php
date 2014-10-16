@@ -8,6 +8,6 @@
 	</p>
 </div>
 <?php
-global $conn; 
-mysqli_close($conn); 
+//global $conn; 
+//mysqli_close($conn); 
 ?>
