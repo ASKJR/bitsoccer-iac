@@ -6,6 +6,6 @@
 		<a href="compradorPesquisa.php?idComprador=<?=$_GET["idComprador"]?>">Pesquisa</a>
 	</li>
  	<li class="end">
-		<a href="#">Logout</a>
+		<a href="../logout.php">Logout</a>
 	</li>
 </ul>

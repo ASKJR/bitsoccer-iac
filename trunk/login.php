@@ -10,11 +10,11 @@ require("./function/mensagens.php");
 			//Validando o login do usuário no sistema; Caso retorne true sucesso
 			if(loginValidation(trim($_POST["email"]),trim($_POST["senha"]))){
 				//caso o usuário seja administrado
-				if($_SESSION["usuario"] == "admin"){
+				if($_SESSION["usuario"] === "admin"){
 					header("Location: /admin/adminHome.php");
 					exit;
 				}
-				else if($_SESSION["usuario"] == "comprador"){
+				else if($_SESSION["usuario"] === "comprador"){
 					header("Location: /comprador/compradorHome.php?idComprador=".$_SESSION["idComprador"]);
 					exit;
 				}
