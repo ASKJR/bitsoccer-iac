@@ -83,10 +83,11 @@ function atualizarComprador($idComprador,$nome,$cpf,$rg,$nascimento){
 	global $conn;
 	
 	$sql  = "UPDATE comprador ";
-	$sql .= "SET nome 			= '$nome'";
-	$sql .= "SET cpf  			= '$cpf' ";
-	$sql .= "SET rg   			= '$rg'  ";
-	$sql .= "SET nascimento   	= '$nascimento' ";
+	$sql .= "SET ";
+	$sql .= "nome 				= '$nome',       ";
+	$sql .= "cpf  				= '$cpf',        ";
+	$sql .= "rg   				= '$rg',         ";
+	$sql .= "nascimento   		= '$nascimento'  ";
 	$sql .= "WHERE idComprador 	=  $idComprador; ";
 	
 	$Execute = mysqli_query($conn,$sql);
@@ -103,13 +104,14 @@ function atualizarEndereco($idComprador,$cep,$logradouro,$bairro,$cidade,$estado
 	global $conn;
 	
 	$sql  = "UPDATE endereco ";
-	$sql .= "SET cep 			= '$cep'          ";
-	$sql .= "SET logradouro  	= '$logradouro'   ";
-	$sql .= "SET bairro   		= '$bairro'       ";
-	$sql .= "SET cidade   		= '$cidade'       ";
-	$sql .= "SET estado 		= '$estado'       ";
-	$sql .= "SET numero 		=  $numero        ";
-	$sql .= "WHERE idComprador 	=  $idComprador;  ";
+	$sql .= "SET ";
+	$sql .= "cep 				= '$cep',          ";
+	$sql .= "logradouro  		= '$logradouro',   ";
+	$sql .= "bairro   			= '$bairro',       ";
+	$sql .= "cidade   			= '$cidade',       ";
+	$sql .= "estado 			= '$estado',       ";
+	$sql .= "numero 			=  $numero         ";
+	$sql .= "WHERE idComprador 	=  $idComprador;   ";
 	
 	$Execute = mysqli_query($conn,$sql);
 	
@@ -124,7 +126,8 @@ function atualizarUsuario($idComprador,$login){
 	global $conn;
 	
 	$sql  = "UPDATE usuario ";
-	$sql .= "SET login         = '$login' ";
+	$sql .= "SET ";
+	$sql .= "login             = '$login' ";
 	$sql .= "WHERE idComprador =  $idComprador; ";
 	
 	$Execute = mysqli_query($conn,$sql);
