@@ -22,6 +22,7 @@
 		echo
 		"<script>
 			alert('Dados alterados com sucesso.');
+			history.back(-1);
 		</script>";
 	}
 	function updateCompradorFail(){
