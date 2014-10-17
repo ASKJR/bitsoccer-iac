@@ -1,7 +1,8 @@
 <?php
 require("../db/connection.php");
 require("../db/crud.php");
-require("../function/validation.php")
+require("../function/validation.php");
+require("../function/mensagens.php");
 	
 	
 	$sucess="";
@@ -57,7 +58,7 @@ require("../function/validation.php")
 			<article>
 				<h2> Cadastro do usuário:</h2>
 			<br>
-			<form action="cadastroUser.php" method="POST" id="formCadastroUser">
+			<form action="compradorAlterarCadastro.php?idComprador<?= '='.$_GET["idComprador"]?>" method="POST" id="formCadastroUser">
 				<fieldset>
 					<legend>Dados pessoais:</legend>
 					<br>
