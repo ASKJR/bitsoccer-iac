@@ -238,4 +238,27 @@ function selectCompradorById($idComprador){
 
 //--------------------------------------------------------------
 
+//-------------------------AJAX---------------------------------
+function ajaxComprador($termo){
+	
+	global $conn;
+	
+	
+	$sql   = "SELECT * FROM comprador where nome like '%".$termo."%' order by nome  ";
+	$json=array();
+	
+	if ($result = mysqli_query($conn, $sql)) {
+		
+		while($comprador = mysqli_fetch_assoc($result)){
+			$json[]=array(
+                   'value'=> $comprador["nome"],
+                   'label'=> $comprador["nome"],
+				   'id'   => $comprador["idComprador"]
+			);
+		}
+	}
+	echo json_encode($json);
+}
+
+//--------------------------------------------------------------
 ?>

@@ -14,6 +14,7 @@
 <title>bitsoccer</title>
 <link rel="stylesheet" href="<?=$path?>/css/styles.css" type="text/css" />
 <link rel="stylesheet" href="<?=$path?>/css/validationEngine.jquery.css" type="text/css" />
+<link rel="stylesheet" href="<?=$path?>/css/ui-darkness/jquery-ui-1.10.4.custom.css" type="text/css" />
 <link rel="shortcut icon" href="<?=$path?>/img/soccer.ico">
 <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
 <script src="<?=$path?>/js/jquery-2.1.0.min.js"></script>
@@ -24,4 +25,5 @@
 <script src="<?=$path?>/js/login.js"></script>
 <script src="<?=$path?>/js/jquery.validationEngine-pt_BR.js"></script>
 <script src="<?=$path?>/js/jquery.validationEngine.js"></script>
+<script src="<?=$path?>/js/adminPesquisaComprador.js"></script>
 

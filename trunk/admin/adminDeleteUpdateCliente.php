@@ -1,4 +1,14 @@
-<!doctype html>
+<?php
+require("../db/connection.php");
+require("../db/crud.php");
+	if($_POST["idComprador"] != ""){
+		$comprador = selectCompradorById($_POST["idComprador"]);
+	}
+	if(isset($_POST["PesquisarComprador"])){
+		header("Location: adminPesquisaComprador.php");
+		exit;
+	}
+?>
 <html>
 <head>
 <?php include("../include.php"); ?>
@@ -19,40 +29,35 @@
         <section id="content">
 
 			<article>
-				
 			<h2>Alterar/Excluir comprador:</h2>
 			<br>
-			<form action="cadastroUser.php" method="POST" id="formCadastroUser">
+			<form action="adminDeleteUpdateCliente.php" method="POST" id="formCadastroUser">
 				<fieldset>
 					<legend>Dados pessoais:</legend>
 					<br>
 						<p>
 							<label for="nome">Nome:</label>
-							<input class="validate[required]" name="nome" id="nome"  type="text" size="60"  />
+							<input value="<?=$comprador['nome']?>" class="validate[required]" name="nome" id="nome"  type="text" size="60"  />
 						</p>
 						<p>
 							<label for="cpf">CPF:</label>
-							<input class="validate[required] cpf" name="cpf" id="cpf"  type="text" size="14" maxlength="14" class="cpf" />
+							<input value="<?=$comprador['cpf']?>" class="validate[required] cpf" name="cpf" id="cpf"  type="text" size="14" maxlength="14" class="cpf" />
 						</p>
 						<p>
 							<label for="rg">RG:</label>
-							<input class="validate[required]" name="rg" id="rg"  type="text" size="14" maxlength="14"/ >
+							<input value="<?=$comprador['rg']?>" class="validate[required]" name="rg" id="rg"  type="text" size="14" maxlength="14"/ >
 						</p>
 						<p>
 							<label for="nascimento">Nascimento:</label>
-							<input class="validate[required]" name="nascimento" id="nascimento"  type="date" />
+							<input value="<?=$comprador['nascimento']?>" class="validate[required]" name="nascimento" id="nascimento"  type="date" />
 						</p>
 						<p>
 							<label for="email">E-mail:</label>
-							<input class="validate[required,custom[email]]"  type="text" name="email" id="email" size="35"/>
+							<input value="<?=$comprador['login']?>" class="validate[required,custom[email]]"  type="text" name="email" id="email" size="35"/>
 						</p>
 						<p>
-							<label for="senha">Senha:</label>
-							<input class="validate[required,minSize[6]]" id="password" name="password" type="password"/>
-						</p>
-						<p>
-							<label for="checkSenha">Confirmar senha:</label>
-							<input class="validate[required,equals[password]]" id="password_two" name="password_two" type="password"/>
+							<label for="senha">Resetar senha:</label>
+							<input  id="password" name="password" type="checkbox"/>
 						</p>
 						<br>
 				</fieldset>
@@ -61,33 +66,36 @@
 						<br>
 						<p>
 							<label for="cep">CEP:</label>
-							<input class="validate[required] cep" name="cep" id="cep"  type="cep" size="7"/>
+							<input value="<?=$comprador['cep']?>" class="validate[required] cep" name="cep" id="cep"  type="cep" size="7"/>
 							<img src="../img/search.png" alt="Procurar Endereço" title="Procurar Endereço" id="lupa" >
 						</p>
 						<p>
 							<label for="logradouro">Logradouro:</label>
-							<input class="validate[required]" name="logradouro" id="logradouro"  type="logradouro" size="50"/>
+							<input value="<?=$comprador['logradouro']?>" class="validate[required]" name="logradouro" id="logradouro"  type="logradouro" size="50"/>
 						</p>
 						<p>
 							<label for="numero">Número:</label>
-							<input class="validate[required] num" name="numero" id="numero"  type="numero" size="10" />
+							<input value="<?=$comprador['numero']?>" class="validate[required] num" name="numero" id="numero"  type="numero" size="10" />
 						</p>
 						
 						<p>
 							<label for="uf">Estado:</label>
-							<input class="validate[required]" name="estado" id="estado"  type="estado" size="2" maxlength="2"/>
+							<input value="<?=$comprador['estado']?>" class="validate[required]" name="estado" id="estado"  type="estado" size="2" maxlength="2"/>
 						</p>
 						<p>
 							<label for="cidade">Cidade:</label>
-							<input class="validate[required]" name="cidade" id="cidade"  type="cidade" size="25"/>
+							<input value="<?=$comprador['cidade']?>" class="validate[required]" name="cidade" id="cidade"  type="cidade" size="25"/>
 						</p>
 						<p>
 							<label for="bairro">Bairro:</label>
-							<input class="validate[required]" name="bairro" id="bairro"  type="bairro" size="25"/>
+							<input value="<?=$comprador['bairro']?>" class="validate[required]" name="bairro" id="bairro"  type="bairro" size="25"/>
 						</p>
+						<br>
+						<br>
 						<p>
-							<input name="Alterar" style="margin-left: 150px;" class="formbutton" value="Alterar" type="submit" />
-						    <input name="Excluir" style="margin-left: 150px;" class="formbutton" value="Excluir" type="submit" />
+							<input name="Alterar" style="margin-left: 50px;" class="formbutton" value="Alterar" type="submit" />
+						    <input name="Excluir" style="margin-left: 50px;" class="formbutton" value="Excluir" type="submit" />
+							<input name="PesquisarComprador" style="margin-left: 50px;" class="formbutton" value="Pesquisar outro comprador" type="submit" />
 						</p>
 				</fieldset>
 			</form>
