@@ -1,12 +1,25 @@
 <?php
 require("../db/connection.php");
 require("../db/crud.php");
-	if($_POST["idComprador"] != ""){
-		$comprador = selectCompradorById($_POST["idComprador"]);
+require("../function/mensagens.php");
+
+
+	if(isset($_POST["idComprador"])){
+		$_SESSION["idBuyer"] = $_POST["idComprador"];
+	}
+	if(isset($_SESSION["idBuyer"])){
+		$comprador = selectCompradorById($_SESSION["idBuyer"]);
 	}
 	if(isset($_POST["PesquisarComprador"])){
 		header("Location: adminPesquisaComprador.php");
 		exit;
+	}
+	if(isset($_POST["Excluir"])){
+		deleteCompradorById($_SESSION["idBuyer"]);
+		deleteCompradorSucess();
+	}
+	if(isset($_POST["Alterar"])){
+		//A implementar
 	}
 ?>
 <html>
@@ -94,7 +107,7 @@ require("../db/crud.php");
 						<br>
 						<p>
 							<input name="Alterar" style="margin-left: 50px;" class="formbutton" value="Alterar" type="submit" />
-						    <input name="Excluir" style="margin-left: 50px;" class="formbutton" value="Excluir" type="submit" />
+						    <input name="Excluir" style="margin-left: 50px;" onclick="return confirm('Você realmente deseja excluir esse comprador?');" class="formbutton" value="Excluir" type="submit" />
 							<input name="PesquisarComprador" style="margin-left: 50px;" class="formbutton" value="Pesquisar outro comprador" type="submit" />
 						</p>
 				</fieldset>
@@ -112,3 +125,4 @@ require("../db/crud.php");
 </div>
 </body>
 </html>
+

@@ -31,6 +31,13 @@
 			alert('Não foi possível alterar seus dados.');
 		</script>";
 	}
+	function deleteCompradorSucess(){
+		echo
+		"<script>
+			alert('O comprador foi deletado com sucesso.');
+			window.location = 'adminPesquisaComprador.php'
+		</script>";
+	}
 	
 	
 ?>
