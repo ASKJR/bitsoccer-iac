@@ -63,7 +63,39 @@ function inserirUsuario($login,$senha){
 
 }
 
+function inserirTime ($selecao, $bandeira){
+	global $conn;
+	//proximo id
+	$last_id_time = selectLastIdTime() + 1;
+	
+	//verifica se o time ja foi cadastrado
+	$query = "select * from time ";
+	$query .= "WHERE selecao = '".$selecao."'";
+	$result = mysqli_query($conn, $query);
+	$row = mysqli_fetch_row($result);
+	//se row for verdadeiro, o time ja esta cadastrado
+	
+	if (!$row) {
+	$sql = "INSERT INTO time ";
+	$sql .= "(idTime, selecao, bandeira) VALUES ";
+	$sql .= "(".$last_id_time.",'".$selecao."','".$bandeira."');";
 
+	if (mysqli_query($conn, $sql)) {
+		echo "<script type=text/javascript>
+				alert ('O Time foi cadastrado com sucesso!!');
+				history.back (-1);
+			</script>";
+	}
+	else echo mysqli_error($conn);
+	
+	}
+	else {
+		echo "<script type=text/javascript>
+				alert ('O Time ja está cadastrado!!');
+				history.back (-1);
+			</script>";
+	}
+}
 
 
 
@@ -174,6 +206,19 @@ function selectLastIdComprador(){
 	global $conn;
 	
 	$sql = "SELECT MAX(idComprador) AS last_id FROM comprador;";
+	
+	if ($result = mysqli_query($conn, $sql)) {
+
+		$row = mysqli_fetch_assoc($result); 
+        return $row["last_id"];
+    }
+}
+
+function selectLastIdTime(){
+	
+	global $conn;
+	
+	$sql = "SELECT MAX(idTime) AS last_id FROM time;";
 	
 	if ($result = mysqli_query($conn, $sql)) {
 
