@@ -1,6 +1,7 @@
 <?php
 require("../db/connection.php");
 require("../db/crud.php");
+require("../function/validation.php");
 require("../function/mensagens.php");
 
 
@@ -18,8 +19,30 @@ require("../function/mensagens.php");
 		deleteCompradorById($_SESSION["idBuyer"]);
 		deleteCompradorSucess();
 	}
+	
+	//$sucess="";
+	
 	if(isset($_POST["Alterar"])){
-		//A implementar
+		$required = array(
+		$_POST["nome"],$_POST["cpf"],$_POST["rg"],$_POST["nascimento"],
+		$_POST["cep"],$_POST["logradouro"],$_POST["bairro"],$_POST["cidade"],$_POST["estado"],$_POST["numero"],
+		$_POST["email"]
+		);
+		if(isFormValido($required)){
+			$idComprador = trim($_SESSION["idBuyer"]);
+			//Atualizando as tabelas
+			if($idComprador != ""){
+				atualizarComprador($idComprador,$_POST["nome"],$_POST["cpf"],$_POST["rg"],$_POST["nascimento"]);
+				atualizarEndereco ($idComprador,$_POST["cep"],$_POST["logradouro"],$_POST["bairro"],$_POST["cidade"],$_POST["estado"],$_POST["numero"]);
+				atualizarUsuario  ($idComprador,$_POST["email"]);
+				$comprador = selectCompradorById($_SESSION["idBuyer"]);
+				updateAdminSucess();
+				//$sucess = true;
+			}
+		}
+		else{
+			//$sucess = false;
+		}
 	}
 ?>
 <html>
@@ -125,4 +148,14 @@ require("../function/mensagens.php");
 </div>
 </body>
 </html>
+<?php 
+	/*if($sucess===true){
+		updateAdminSucess();
+		exit;
+	}
+	else if($sucess===false){
+		updateCompradorFail();
+		exit;
+	}*/
+?>
 
