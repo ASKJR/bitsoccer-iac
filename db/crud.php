@@ -147,6 +147,20 @@ function atualizarUsuario($idComprador,$login){
 //----------------------------DELETE----------------------------
 
 
+function deleteCompradorById($idComprador){
+	
+	global $conn;
+	
+	$sql  = "DELETE FROM comprador ";
+	$sql .= "WHERE idComprador =  $idComprador; ";
+	
+	$Execute = mysqli_query($conn,$sql);
+	
+	if($Execute === false){
+		echo 'error - ';
+		echo mysqli_error($conn);
+	}
+}
 
 
 

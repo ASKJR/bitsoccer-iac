@@ -1,3 +1,8 @@
+<?php
+if(isset($_SESSION["idBuyer"])){
+	unset($_SESSION["idBuyer"]);
+}
+?>
 <html>
 <head>
 <?php include("../include.php"); ?>
