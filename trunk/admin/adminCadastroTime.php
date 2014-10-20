@@ -1,3 +1,38 @@
+<?php
+	require("../db/connection.php");
+	require("../db/crud.php");
+	require("../function/data.php");
+	require("../function/validation.php");
+	require("../function/mensagens.php");
+	
+	$sucess = "";
+	if(isset($_POST['submit'])){
+	
+		$required = array(
+			$_POST['selecao']
+		);
+		if (isFormValido($required)){
+			$selecao = $_POST['selecao'];
+			$texto = $selecao;
+			$dir = "../bandeiras/";
+			$arquivo =  ISSET($_FILES['bandeira']) ? $_FILES["bandeira"] : FALSE;
+			$ext = substr($arquivo['name'],-4);
+			if (strcmp ($ext, ".jpg")==0 || strcmp ($ext, ".img")==0 || strcmp ($ext, ".png")==0){
+				for ($i=0;$i<strlen($selecao);$i++) {
+					if ($texto[$i] == ' ') $texto[$i] = '_';
+				}
+				$nome_imagem = $dir.$texto.$ext;
+				if (move_uploaded_file ($arquivo['tmp_name'], $nome_imagem)) {
+					inserirTime($selecao, $nome_imagem);
+				}
+			$sucess = true;
+			}
+			else echo "<script type=text/javascript> alert('Insira uma bandeira!'); history.back(-1);</script>";
+			
+		}
+		else $sucess = false;
+	}
+?>
 <!doctype html>
 <html>
 <head>
@@ -22,17 +57,17 @@
 				<h2>Cadastrar time</h2>
 				<fieldset>
                 <legend>Formulário</legend>
-					<form action="#" method="POST" enctype="multipart/form-data">
+					<form action="adminCadastroTime.php" method="POST" enctype="multipart/form-data">
 						<p>
 							<label for="selecao">Nome da seleção:</label>
-							<input name="selecao" id="selecao"  type="text" size="42" />
+							<input class="validate[required]" name="selecao" id="selecao"  type="text" size="42" />
 						</p>
 						<p>
 							<label for="bandeira">Bandeira:</label>
-							<input type="file" name="picBandeira">
+							<input type="file" name="bandeira">
 						</p>
 						<p>
-							<input name="cadastrar" style="margin-left: 150px;" class="formbutton" value="Cadastrar" type="submit" />
+							<input name="submit" style="margin-left: 150px;" class="formbutton" value="Cadastrar" type="submit" />
 						</p>	
 					</form>
 				</legend>
@@ -49,3 +84,9 @@
 </div>
 </body>
 </html>
+<?php 
+	if($sucess===false){
+		cadastroFailAlert();
+		exit;
+	}
+?>
