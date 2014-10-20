@@ -25,10 +25,17 @@
 			history.back(-1);
 		</script>";
 	}
+	function updateAdminSucess(){
+		echo
+		"<script>
+			alert('Dados alterados com sucesso.');
+		</script>";
+	}
 	function updateCompradorFail(){
 		echo
 		"<script>
 			alert('Não foi possível alterar seus dados.');
+			window.location.reload();
 		</script>";
 	}
 	function deleteCompradorSucess(){
