@@ -97,7 +97,21 @@ function inserirTime ($selecao, $bandeira){
 	}
 }
 
-
+function inserirJogo ($tim1_id, $tim2_id, $data, $horario, $local, $maxIng){
+	global $conn;
+	$sql = "INSERT INTO jogo ";
+	$sql .= "(idTime1, idTime2, local, data, horario, maxIngresso) VALUES ";
+	$sql .= "(".$tim1_id.",".$tim2_id.",'".$local."','".$data."','".$horario."',".$maxIng.");";
+	
+	if (mysqli_query($conn, $sql)) {
+		echo "<script type=text/javascript>
+				alert ('O Jogo foi cadastrado com sucesso!!');
+				history.back (-1);
+			</script>";
+	}
+	else echo mysqli_error($conn);
+	 
+}
 
 
 
