@@ -12,11 +12,11 @@
 			$_POST['selecao']
 		);
 		if (isFormValido($required)){
-			$selecao = $_POST['selecao'];
+			$selecao = strtolower($_POST['selecao']);
 			$texto = $selecao;
 			$dir = "../bandeiras/";
 			$arquivo =  ISSET($_FILES['bandeira']) ? $_FILES["bandeira"] : FALSE;
-			$ext = substr($arquivo['name'],-4);
+			$ext = strtolower(substr($arquivo['name'],-4));
 			if (strcmp ($ext, ".jpg")==0 || strcmp ($ext, ".img")==0 || strcmp ($ext, ".png")==0){
 				for ($i=0;$i<strlen($selecao);$i++) {
 					if ($texto[$i] == ' ') $texto[$i] = '_';
@@ -57,14 +57,14 @@
 				<h2>Cadastrar time</h2>
 				<fieldset>
                 <legend>Formulário</legend>
-					<form action="adminCadastroTime.php" method="POST" enctype="multipart/form-data">
+					<form action="adminCadastroTime.php" method="POST" enctype="multipart/form-data" id="formCadastroTime">
 						<p>
 							<label for="selecao">Nome da seleção:</label>
 							<input class="validate[required]" name="selecao" id="selecao"  type="text" size="42" />
 						</p>
 						<p>
 							<label for="bandeira">Bandeira:</label>
-							<input type="file" name="bandeira">
+							<input class="validate[required]" type="file" name="bandeira">
 						</p>
 						<p>
 							<input name="submit" style="margin-left: 150px;" class="formbutton" value="Cadastrar" type="submit" />

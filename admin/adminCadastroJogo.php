@@ -1,3 +1,31 @@
+	<?php
+	require("../db/connection.php");
+	require("../db/crud.php");
+	require("../function/data.php");
+	require("../function/validation.php");
+	require("../function/mensagens.php");
+	
+	//preenche os combo-box
+	$query = "SELECT * FROM time ";
+	$query .= "ORDER BY selecao;";
+	$res = mysqli_query($conn, $query);
+	$verifica = "";
+	
+	if (isset($_POST['cadastrar'])){
+		$required = array(
+				$_POST['time1'],$_POST['time2'],$_POST['data'],$_POST['horario'],$_POST['local'],$_POST['maxTicket']
+			);
+		if (isFormValido($required)){
+			inserirJogo($_POST['time1'],$_POST['time2'],$_POST['data'],$_POST['horario'],$_POST['local'],$_POST['maxTicket']);
+			$verifica = true;
+		}
+		else $verifica = false;
+	}
+
+?>
+
+
+
 <!doctype html>
 <html>
 <head>
@@ -24,40 +52,45 @@
 				
 				<fieldset>
                 <legend>Formulário</legend>
-                <form action="#" method="POST">
+                <form action="adminCadastroJogo.php" method="POST" id="formCadastroJogo">
                     <p>
 						<label for="time1">Time1:</label>
-						<select name="time1" id="time1">
+						<select class="validate[required]" name="time1" id="time1">
 							<option></option>
-							<option>Brazil</option>
-							<option>Japão</option>
-							<option>França</option>
+							<?php
+								while (	$row = mysqli_fetch_row($res)){
+									echo "<option value=".$row[0].">".$row[1]."</option>";
+								}
+							?>
 						</select>
 					</p>
 					<p>
 						<label for="time2">Time2:</label>
-						<select name="time2" id="time2">
+						<select class="validate[required]" name="time2" id="time2">
 							<option></option>
-							<option>Brazil</option>
-							<option>Japão</option>
-							<option>França</option>
+							<?php
+								mysqli_data_seek($res, 0);
+								while (	$row = mysqli_fetch_row($res)){
+									echo "<option value=".$row[0].">".$row[1]."</option>";
+								}
+							?>
 						</select>
 					</p>
 					<p>
 						<label for="data">Data:</label>
-						<input name="data" id="data"  type="date"/>
+						<input type="date" class="validate[required]" name="data" id="data" />
 					</p>
 					<p>
 						<label for="horario">Horário:</label>
-						<input name="horario" id="horario"  type="text"/>
+						<input class="validate[required] time" name="horario" id="horario"  type="text"/>
 					</p>
 					<p>
 						<label for="local">Local:</label>
-						<input name="local" id="local"  type="local" size="25"/>
+						<input class="validate[required]" name="local" id="local"  type="local" size="25"/>
 					</p>
 					<p>
 						<label for="maxTicket">Máx. Ingrassos:</label>
-						<input name="maxTicket" id="maxTicket"  type="number" size="25"/>
+						<input class="validate[required] num" name="maxTicket" id="maxTicket"  type=" numero" size="6" maxlength="4"/>
 					</p>
 					<p>
 						<input name="cadastrar" style="margin-left: 150px;" class="formbutton" value="Cadastrar" type="submit" />
@@ -78,3 +111,9 @@
 </div>
 </body>
 </html>
+<?php
+	if($verifica===false){
+		cadastroFailAlert();
+		exit;
+	}
+?>
