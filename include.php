@@ -3,7 +3,7 @@
 	//Direcionando os diretórios corretamentamente para realizar os includes
 	$path="";
 	$dir = getcwd();
-	if($dir ==="C:Webserver\wamp\www\comprador" || $dir ==="C:Webserver\wamp\www\admin"){
+	if($dir ==="C:\Webserver\wamp\www\comprador" || $dir ==="C:\Webserver\wamp\www\admin"){
 		$path="..";
 	}
 	else{
