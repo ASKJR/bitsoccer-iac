@@ -56,7 +56,6 @@
                     <p>
 						<label for="time1">Time1:</label>
 						<select class="validate[required]" name="time1" id="time1">
-							<option></option>
 							<?php
 								while (	$row = mysqli_fetch_row($res)){
 									echo "<option value=".$row[0].">".$row[1]."</option>";
@@ -67,7 +66,7 @@
 					<p>
 						<label for="time2">Time2:</label>
 						<select class="validate[required]" name="time2" id="time2">
-							<option></option>
+							<option selected></option>
 							<?php
 								mysqli_data_seek($res, 0);
 								while (	$row = mysqli_fetch_row($res)){
@@ -82,7 +81,7 @@
 					</p>
 					<p>
 						<label for="horario">Horário:</label>
-						<input class="validate[required] time" name="horario" id="horario"  type="text"/>
+						<input class="validate[required] time" name="horario" id="horario"  type="time"/>
 					</p>
 					<p>
 						<label for="local">Local:</label>
