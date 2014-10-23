@@ -97,27 +97,43 @@ function inserirTime ($selecao, $bandeira){
 	}
 }
 
+
+//INSERE O JOGO NO BD E FAZ AS VERIFICAÇÕES NECESSARIAS
 function inserirJogo ($tim1_id, $tim2_id, $data, $horario, $local, $maxIng){
 	global $conn;
-	$sql = "INSERT INTO jogo ";
-	$sql .= "(idTime1, idTime2, local, data, horario, maxIngresso) VALUES ";
-	$sql .= "(".$tim1_id.",".$tim2_id.",'".$local."','".$data."','".$horario."',".$maxIng.");";
+	//VERIFICA SE O JOGO JA FOI CADASTRADO
+	$query = "SELECT * FROM jogo ";
+	$query .= "WHERE idTime1=".$tim1_id." AND idTime2=".$tim2_id.";";
+	$result = mysqli_query($conn, $query);
+	$row = mysqli_fetch_row($result);
+	//se $row for diferente de false, o jogo ja está cadastrado!!
+	if(!$row) {
 	
-	if ($tim1_id == $tim2_id) {
+		$sql = "INSERT INTO jogo ";
+		$sql .= "(idTime1, idTime2, local, data, horario, maxIngresso) VALUES ";
+		$sql .= "(".$tim1_id.",".$tim2_id.",'".$local."','".$data."','".$horario."',".$maxIng.");";
+	
+		if ($tim1_id == $tim2_id) {
+					echo "<script type=text/javascript>
+							alert ('Times Iguais selecionados');
+							history.back(-1);
+						</script>";
+					}
+		else {			
+			if (mysqli_query($conn, $sql)) {
 				echo "<script type=text/javascript>
-						alert ('Times Iguais selecionados');
-						history.back(-1);
+						alert ('O Jogo foi cadastrado com sucesso!!');
+						history.back (-1);
 					</script>";
-				}
-	else {			
-		if (mysqli_query($conn, $sql)) {
-			echo "<script type=text/javascript>
-					alert ('O Jogo foi cadastrado com sucesso!!');
-					history.back (-1);
-				</script>";
-		}
-		else echo mysqli_error($conn);
-	 
+			}
+			else echo mysqli_error($conn);
+		}	
+	}
+	else {
+		echo "<script type=text/javascript>
+				alert ('O jogo informado ja está cadastrado!!!');
+				history.back (-1);
+			</script>";
 	}
 }
 
