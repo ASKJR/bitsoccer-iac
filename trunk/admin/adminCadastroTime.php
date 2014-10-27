@@ -12,13 +12,13 @@
 			$_POST['selecao']
 		);
 		if (isFormValido($required)){
-			$selecao = strtolower($_POST['selecao']);
-			$texto = $selecao;
+			$selecao = ($_POST['selecao']);
+			$texto = strtolower(removeAcentos(trim($selecao)));
 			$dir = "../bandeiras/";
 			$arquivo =  ISSET($_FILES['bandeira']) ? $_FILES["bandeira"] : FALSE;
 			$ext = strtolower(substr($arquivo['name'],-4));
 			if (strcmp ($ext, ".jpg")==0 || strcmp ($ext, ".img")==0 || strcmp ($ext, ".png")==0){
-				for ($i=0;$i<strlen($selecao);$i++) {
+				for ($i=0;$i<strlen($texto);$i++) {
 					if ($texto[$i] == ' ') $texto[$i] = '_';
 				}
 				$nome_imagem = $dir.$texto.$ext;

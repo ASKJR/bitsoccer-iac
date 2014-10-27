@@ -76,17 +76,17 @@ function inserirTime ($selecao, $bandeira){
 	//se row for verdadeiro, o time ja esta cadastrado
 	
 	if (!$row) {
-	$sql = "INSERT INTO time ";
-	$sql .= "(idTime, selecao, bandeira) VALUES ";
-	$sql .= "(".$last_id_time.",'".$selecao."','".$bandeira."');";
+		$sql  = "INSERT INTO time ";
+		$sql .= "(idTime, selecao, bandeira) VALUES ";
+		$sql .= "(".$last_id_time.",'".$selecao."','".$bandeira."');";
 
-	if (mysqli_query($conn, $sql)) {
-		echo "<script type=text/javascript>
-				alert ('O Time foi cadastrado com sucesso!!');
-				history.back (-1);
-			</script>";
-	}
-	else echo mysqli_error($conn);
+		if (mysqli_query($conn, $sql)) {
+			echo "<script type=text/javascript>
+					alert ('O Time foi cadastrado com sucesso!!');
+					history.back (-1);
+				</script>";
+		}
+		else echo mysqli_error($conn);
 	
 	}
 	else {
