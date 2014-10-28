@@ -26,6 +26,11 @@ th, td {
 	text-align: center;
 }
 
+.alignTextLeft{
+	text-align: left;
+
+}
+
 th {
 	color: #fff;
 	background: #990000 none repeat-x scroll left top;

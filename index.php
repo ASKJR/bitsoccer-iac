@@ -1,4 +1,14 @@
-<!doctype html>
+<?php
+require("./db/connection.php");
+require("./db/crud.php");
+require("./function/data.php");
+require("./function/validation.php");
+require("./function/mensagens.php");
+require_once("./function/data.php");
+
+	$jogos = selectJogos();
+	
+?>
 <html>
 <head>
 	<?php include("include.php"); ?>
@@ -37,24 +47,18 @@
 					<th> Local 	</th>
 					<th> Data 	</th>
 				</tr>
-				<tr>
-					<td> Brazil     </td>
-					<td> Italy      </td>
-					<td> Curitiba   </td>
-					<td> 23/10/2014 </td>
-				</tr>
-					<tr>
-					<td> Brazil </td>
-					<td> Italy </td>
-					<td> Curitiba </td>
-					<td> 23/10/2014</td>
-				</tr>
-					<tr>
-					<td> Brazil </td>
-					<td> Italy </td>
-					<td> Curitiba </td>
-					<td> 23/10/2014</td>
-				</tr>
+				<?php
+					foreach($jogos as $jogo){
+						if($jogo['is_sorteado'] == true){
+							echo "<tr>";
+							echo "<td class='alignTextLeft'>"."<img src='$jogo[bandeira1]' alt='Concorrer' title='Adicionar jogo'>". "-".$jogo['selecao1'] ."</td>";
+							echo "<td class='alignTextLeft'>"."<img src='$jogo[bandeira2]' alt='Concorrer' title='Adicionar jogo'>". "-".$jogo['selecao2'] ."</td>";
+							echo "<td>" .$jogo['local']. "</td>";
+							echo "<td width='15px'>" .UserDate($jogo['data']). "</td>";
+							echo "</tr>";
+						}
+					}
+				?>
 			</table>
 		</article>
 	
@@ -68,24 +72,18 @@
 					<th> Local  </th>
 					<th> Data   </th>
 				</tr>
-				<tr>
-					<td> Brazil </td>
-					<td> Italy </td>
-					<td> Curitiba </td>
-					<td> 23/10/2014</td>
-				</tr>
-					<tr>
-					<td> Brazil </td>
-					<td> Italy </td>
-					<td> Curitiba </td>
-					<td> 23/10/2014</td>
-				</tr>
-					<tr>
-					<td> Brazil </td>
-					<td> Italy </td>
-					<td> Curitiba </td>
-					<td> 23/10/2014</td>
-				</tr>
+				<?php
+					foreach($jogos as $jogo){
+						if($jogo['is_sorteado'] == false){
+							echo "<tr>";
+							echo "<td class='alignTextLeft'>"."<img src='$jogo[bandeira1]' alt='Concorrer' title='Adicionar jogo'>". "-".$jogo['selecao1'] ."</td>";
+							echo "<td class='alignTextLeft'>"."<img src='$jogo[bandeira2]' alt='Concorrer' title='Adicionar jogo'>". "-".$jogo['selecao2'] ."</td>";
+							echo "<td>" .$jogo['local']. "</td>";
+							echo "<td width='15px'>" .UserDate($jogo['data']). "</td>";
+							echo "</tr>";
+						}
+					}
+				?>
 			</table>
 		</article>
         </section>

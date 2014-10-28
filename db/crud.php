@@ -137,8 +137,28 @@ function inserirJogo ($tim1_id, $tim2_id, $data, $horario, $local, $maxIng){
 	}
 }
 
+/*function inserirCompradorJogo($idComprador,$idJogo){
 
+	global $conn;
+	
+	$password = md5($senha);
+	$last_id_comprador = selectLastIdComprador();
+	$sql  = "INSERT INTO usuario ";
+	$sql .= "(idComprador,login,senha) ";
+	$sql .= "VALUES ($last_id_comprador,'$login','$password');";
+	
+	$Execute = mysqli_query($conn,$sql);
+	
+	if($Execute === false){
+		echo 'error - ';
+		echo mysqli_error($conn);
+	}
+	else{
+		//echo "SUCESS";
+	}
 
+}
+*/
 
 
 
@@ -154,7 +174,7 @@ function atualizarComprador($idComprador,$nome,$cpf,$rg,$nascimento){
 	
 	$sql  = "UPDATE comprador ";
 	$sql .= "SET ";
-	$sql .= "nome 				= '$nome',       ";
+		$sql .= "nome 				= '$nome',       ";
 	$sql .= "cpf  				= '$cpf',        ";
 	$sql .= "rg   				= '$rg',         ";
 	$sql .= "nascimento   		= '$nascimento'  ";
@@ -329,10 +349,35 @@ function selectCompradorById($idComprador){
 		return $row;
 	}
 	else{
-		die('Invalid query: ' . mysql_error());
+		echo 'error - ';
+		echo mysqli_error($conn);
 	}
 }
 
+function selectJogos(){
+	
+	global $conn;
+	
+	$sql  = "SELECT j.*, ";
+	$sql .= "time1.selecao AS selecao1,time1.bandeira AS bandeira1, ";
+	$sql .= "time2.selecao AS selecao2, time2.bandeira AS bandeira2 ";
+	$sql .= "FROM jogo j "; 												
+	$sql .= "INNER JOIN time time1 ON (j.idTime1 = time1.idTime)  ";  
+	$sql .= "INNER JOIN time time2 ON (j.idTime2 = time2.idTime); ";
+	
+	if ($result = mysqli_query($conn, $sql)) {
+
+		while ($row = mysqli_fetch_array($result)) {
+			$rows[]= $row;
+		}
+			mysqli_free_result($result);
+			return $rows;
+	}
+	else{
+		echo 'error - ';
+		echo mysqli_error($conn);
+	}
+}
 //--------------------------------------------------------------
 
 //-------------------------AJAX---------------------------------
