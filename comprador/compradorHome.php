@@ -40,7 +40,6 @@ require_once("../function/data.php");
 					<th> Local  </th>
 					<th> Horário </th>
 					<th> Data   </th>
-					<th> Concorrer</th>
 				</tr>
 				<?php
 					foreach($jogos as $jogo){
@@ -51,7 +50,6 @@ require_once("../function/data.php");
 							echo "<td>" .$jogo['local']. "</td>";
 							echo "<td>" . TimeUser($jogo['horario']). "</td>";
 							echo "<td width='15px'>" .UserDate($jogo['data']). "</td>";
-							echo "<td>" ."<img src='../img/adicionar.png' alt='Concorrer' title='Adicionar jogo'>"."</td>";
 							echo "</tr>";
 						}
 					}
@@ -80,7 +78,7 @@ require_once("../function/data.php");
 							echo "<td>" .$jogo['local']. "</td>";
 							echo "<td>" .TimeUser($jogo['horario']). "</td>";
 							echo "<td width='15px'>" .UserDate($jogo['data']). "</td>";
-							echo "<td>" ."<img src='../img/adicionar.png' alt='Concorrer' title='Adicionar jogo'>"."</td>";
+							echo "<td>" ."<a href='compradorJogosConcorrendo.php?idComprador=".$_SESSION["idComprador"]."&idJogo=".$jogo['idJogo']."'>"."<img src='../img/adicionar.png' alt='Concorrer' title='Adicionar jogo'>"."</a>"."</td>";
 							echo "</tr>";
 						}
 					}
