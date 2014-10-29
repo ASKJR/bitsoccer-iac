@@ -1,4 +1,16 @@
-<!doctype html>
+<?php
+require("../db/connection.php");
+require("../db/crud.php");
+require("../function/data.php");
+require("../function/validation.php");
+require("../function/mensagens.php");
+require_once("../function/data.php");
+
+	//Verifica se o id do jogo e comprador estão setados na url
+	if(isset($_GET["idComprador"]) && isset($_GET["idJogo"])){
+		inserirCompradorJogo($_GET["idComprador"],$_GET["idJogo"]);
+	}
+?>
 <html>
 <head>
 <?php include("../include.php"); ?>
@@ -31,7 +43,6 @@
 						<th>Time 2</th>
 						<th>Local</th>
 						<th>Data</th>
-						<th>Alterar</th>
 						<th>Excluir</th>
 					</tr>
 					<tr>
@@ -39,23 +50,6 @@
 						<td>Argentina</td>
 						<td>Curitiba</td>
 						<td>08/10/2014</td>
-						<td><img src="../img/update.png" alt="Alterar" title="Alterar"></td>
-						<td><img src="../img/excluir.png" alt="Excluir" title="Excluir"></td>
-					</tr>
-					<tr>
-						<td>Brazil</td>
-						<td>Argentina</td>
-						<td>Curitiba</td>
-						<td>08/10/2014</td>
-						<td><img src="../img/update.png" alt="Alterar" title="Alterar"></td>
-						<td><img src="../img/excluir.png" alt="Excluir" title="Excluir"></td>
-					</tr>
-					<tr>
-						<td>Brazil</td>
-						<td>Argentina</td>
-						<td>Curitiba</td>
-						<td>08/10/2014</td>
-						<td><img src="../img/update.png" alt="Alterar" title="Alterar"></td>
 						<td><img src="../img/excluir.png" alt="Excluir" title="Excluir"></td>
 					</tr>
 				</table>

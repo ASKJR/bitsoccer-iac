@@ -137,32 +137,46 @@ function inserirJogo ($tim1_id, $tim2_id, $data, $horario, $local, $maxIng){
 	}
 }
 
-/*function inserirCompradorJogo($idComprador,$idJogo){
+function inserirCompradorJogo($idComprador,$idJogo){
 
 	global $conn;
 	
-	$password = md5($senha);
-	$last_id_comprador = selectLastIdComprador();
-	$sql  = "INSERT INTO usuario ";
-	$sql .= "(idComprador,login,senha) ";
-	$sql .= "VALUES ($last_id_comprador,'$login','$password');";
-	
-	$Execute = mysqli_query($conn,$sql);
-	
-	if($Execute === false){
-		echo 'error - ';
-		echo mysqli_error($conn);
+	if(!isCompradorJogoMaximo($idComprador)){
+		if(!isCompradorJogoRepetido($idComprador,$idJogo)){
+		
+			$sql  = "INSERT INTO comprador_jogo ";
+			$sql .= "(idComprador,idJogo) ";
+			$sql .= "VALUES ($idComprador,$idJogo);";
+			
+			$Execute = mysqli_query($conn,$sql);
+			
+			if($Execute === false){
+				echo 'error - ';
+				echo mysqli_error($conn);
+			}
+			else{
+				echo "<script type=text/javascript>
+				alert ('Parabéns.Você está concorrendo ao jogo selecionado!');
+				history.back(-1);
+				</script>";
+			}
+		}
+		else{
+			echo "<script type=text/javascript>
+				alert ('Você já está concorrendo a esse jogo! Tente outro jogo.');
+				history.back(-1);
+				</script>";
+		
+		}
 	}
 	else{
-		//echo "SUCESS";
+		echo "<script type=text/javascript>
+				alert ('Você já está concorrendo ao número máximo de jogos. Só é permitido 3 jogos por comprador!');
+				history.back(-1);
+				</script>";
+		
 	}
-
 }
-*/
-
-
-
-
 
 
 
@@ -372,6 +386,53 @@ function selectJogos(){
 		}
 			mysqli_free_result($result);
 			return $rows;
+	}
+	else{
+		echo 'error - ';
+		echo mysqli_error($conn);
+	}
+}
+
+function isCompradorJogoRepetido($idComprador,$idJogo){
+	
+	global $conn;
+	
+	//Verificar se um comprador já está concorrendo a um jogo.Não deixar 
+	//selecionar o mesmo jogo 2 vezes
+	$sql  = "SELECT * FROM comprador_jogo ";
+	$sql .= "WHERE idComprador = '$idComprador' ";
+	$sql .= "AND   idJogo      = '$idJogo'; ";
+	
+	if ($result = mysqli_query($conn, $sql)) {
+		$row_cnt = mysqli_num_rows($result);
+		if($row_cnt == 1){
+			return true;
+		}
+		else
+			return false;
+	}
+	else{
+		echo 'error - ';
+		echo mysqli_error($conn);
+	}
+}
+
+function isCompradorJogoMaximo($idComprador){
+	
+	global $conn;
+	
+	//Verificar se um comprador já está concorrendo ao número máximo de jogos (3) 
+	
+	$sql  = "SELECT * FROM comprador_jogo ";
+	$sql .= "WHERE idComprador = '$idComprador' ";
+	
+	if ($result = mysqli_query($conn, $sql)) {
+		$row_cnt = mysqli_num_rows($result);
+		if($row_cnt >= 3){
+			return true;
+		}
+		else
+			return false;
 	}
 	else{
 		echo 'error - ';
