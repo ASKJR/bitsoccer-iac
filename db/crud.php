@@ -266,7 +266,28 @@ function deleteCompradorById($idComprador){
 	}
 }
 
+function deleteCompradorJogoById($idCompradorJogo){
+	
+	
+	global $conn;
+	
+	$sql  = "DELETE FROM comprador_jogo ";
+	$sql .= "WHERE idCompradorJogo =  $idCompradorJogo; ";
+	
+	$Execute = mysqli_query($conn,$sql);
+	
+	if($Execute === false){
+		echo 'error - ';
+		echo mysqli_error($conn);
+	}
+	else{
+		echo "<script type=text/javascript>
+			alert ('Jogo deletado com sucesso!');
+			history.back(-1);
+			</script>";
+	}
 
+}
 
 
 //----------------------------SELECT----------------------------
@@ -378,6 +399,34 @@ function selectJogos(){
 	$sql .= "FROM jogo j "; 												
 	$sql .= "INNER JOIN time time1 ON (j.idTime1 = time1.idTime)  ";  
 	$sql .= "INNER JOIN time time2 ON (j.idTime2 = time2.idTime); ";
+	
+	if ($result = mysqli_query($conn, $sql)) {
+
+		while ($row = mysqli_fetch_array($result)) {
+			$rows[]= $row;
+		}
+			mysqli_free_result($result);
+			return $rows;
+	}
+	else{
+		echo 'error - ';
+		echo mysqli_error($conn);
+	}
+}
+
+
+function selectJogosByComprador($idComprador){
+	
+	global $conn;
+	
+	$sql  = "SELECT c_j.*,j.*, ";
+	$sql .= "time1.selecao AS selecao1,time1.bandeira AS bandeira1, ";
+	$sql .= "time2.selecao AS selecao2, time2.bandeira AS bandeira2 ";
+	$sql .= "FROM comprador_jogo  c_j ";
+	$sql .= "INNER JOIN jogo j ON (c_j.idJogo = j.idJogo) ";
+	$sql .= "INNER JOIN time time1 ON (j.idTime1 = time1.idTime)  ";  
+	$sql .= "INNER JOIN time time2 ON (j.idTime2 = time2.idTime) ";
+	$sql .= "WHERE c_j.idComprador =$idComprador; "; 
 	
 	if ($result = mysqli_query($conn, $sql)) {
 
