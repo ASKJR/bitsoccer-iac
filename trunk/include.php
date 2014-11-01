@@ -23,6 +23,7 @@
 <script src="<?=$path?>/js/jquery.mask.min.js"></script>
 <script src="<?=$path?>/js/cadastroUser.js"></script>
 <script src="<?=$path?>/js/cadastroJogo.js"></script>
+<script src="<?=$path?>/js/cadastroSorteio.js"></script>
 <script src="<?=$path?>/js/login.js"></script>
 <script src="<?=$path?>/js/jquery.validationEngine-pt_BR.js"></script>
 <script src="<?=$path?>/js/jquery.validationEngine.js"></script>

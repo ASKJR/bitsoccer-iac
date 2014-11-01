@@ -1,4 +1,15 @@
-<!doctype html>
+﻿<?php
+require("../db/connection.php");
+require("../db/crud.php");
+require("../function/data.php");
+require("../function/validation.php");
+require("../function/mensagens.php");
+require_once("../function/data.php");
+
+	$jogos = selectJogos();
+
+	
+?>
 <html>
 <head>
 <?php include("../include.php"); ?>
@@ -22,18 +33,25 @@
 				<h2>Sortear Jogo</h2>
 				<fieldset>
                 <legend>Formulário</legend>
-					<form action="#" method="POST">
+					<form action="#" method="POST" id="formSorteio">
 						<p>
 							<label for="selectJogo">Selecione o jogo:</label>
-							<select name="selectJogo" id="selectJogo">
+							<select class="validate[required]" name="selectJogo" id="selectJogo">
 								<option> </option>
-								<option>Time1 X Time2</option>
-								<option>Time1 X Time3</option>
+								<?php
+									foreach($jogos as $jogo){
+										if($jogo['is_sorteado'] == false){
+											echo "<option value=".$jogo['idJogo'].">";
+											echo $jogo['selecao1'] . " X " . $jogo['selecao2'];
+											echo "</option>";
+										}
+									}
+								?>
 							</select>
 						</p>
 						<p>
 							<label for="qtdSorteio">Qtd. para sortear:</label>
-							<input name="qtdSorteio" id="qtdSorteio"  type="number"/>
+							<input class="validate[required] numSorteio" name="qtdSorteio" id="qtdSorteio"  type="text" size="6"/>
 						</p>
 						<p>
 							<input name="sortear" style="margin-left: 150px;" class="formbutton" value="Sortear" type="submit" />
