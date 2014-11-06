@@ -1,4 +1,15 @@
 $(function(){
+	$('#selectJogo').hide();
+	$('#teste').hide();
+	$('#formPesquisa input[name=tipPesq]').on('change',function(){
+		if($('#formPesquisa input[name=tipPesq]:checked').val()=='compPorJogo')
+			$('#selectJogo').show();
+		else
+			$('#selectJogo').hide();
+			});
+	
+	
+	
 	$("#SearchComprador").autocomplete({
 		source:'adminGetAutocomplete.php',
 		minLength:3,
