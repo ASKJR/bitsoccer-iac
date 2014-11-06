@@ -178,7 +178,24 @@ function inserirCompradorJogo($idComprador,$idJogo){
 	}
 }
 
-
+function inserirSorteio($idJogo,$idComprador){
+	
+	global $conn;
+	
+	$sql  = "INSERT INTO sorteio ";
+	$sql .= "(idJogo,idComprador) ";
+	$sql .= "VALUES ($idJogo,$idComprador); ";
+	
+	$Execute = mysqli_query($conn,$sql);
+	
+	if($Execute === false){
+		echo 'error - ';
+		echo mysqli_error($conn);
+	}
+	else{
+		//echo Smth.
+	}
+}
 
 //----------------------------UPDATE----------------------------
 
@@ -188,7 +205,7 @@ function atualizarComprador($idComprador,$nome,$cpf,$rg,$nascimento){
 	
 	$sql  = "UPDATE comprador ";
 	$sql .= "SET ";
-		$sql .= "nome 				= '$nome',       ";
+	$sql .= "nome 				= '$nome',       ";
 	$sql .= "cpf  				= '$cpf',        ";
 	$sql .= "rg   				= '$rg',         ";
 	$sql .= "nascimento   		= '$nascimento'  ";
@@ -233,6 +250,25 @@ function atualizarUsuario($idComprador,$login){
 	$sql .= "SET ";
 	$sql .= "login             = '$login' ";
 	$sql .= "WHERE idComprador =  $idComprador; ";
+	
+	$Execute = mysqli_query($conn,$sql);
+	
+	if($Execute === false){
+		echo 'error - ';
+		echo mysqli_error($conn);
+	}
+}
+
+function atualizarStatusJogo($idJogo){
+	
+	global $conn;
+	
+	$is_sorteado=true;
+	
+	$sql  = "UPDATE jogo ";
+	$sql .= "SET ";
+	$sql .= "is_sorteado 	= $is_sorteado ";
+	$sql .= "WHERE idJogo 	= $idJogo; ";
 	
 	$Execute = mysqli_query($conn,$sql);
 	
@@ -488,6 +524,36 @@ function isCompradorJogoMaximo($idComprador){
 		echo mysqli_error($conn);
 	}
 }
+
+//Retorna os compradores sorteados
+function sortearCompradores($idJogo,$numSorteado){
+	
+	global $conn;
+	
+	//Pega os compradores da tabela comprador_jogo de forma aleatória que estejam concorrendo a
+	//um determinado jogo que vai sorteado pelo ADMIN;
+	
+	$sql  = "SELECT * FROM comprador_jogo ";
+	$sql .= "WHERE idJogo = $idJogo ";
+	$sql .= "AND idComprador NOT IN (SELECT idComprador FROM sorteio) ";
+	$sql .= "ORDER BY RAND() ";
+	$sql .= "LIMIT $numSorteado ";
+	
+	
+	if ($result = mysqli_query($conn, $sql)) {
+
+		while ($row = mysqli_fetch_array($result)) {
+			$rows[]= $row;
+		}
+			mysqli_free_result($result);
+			return $rows;
+	}
+	else{
+		echo 'error - ';
+		echo mysqli_error($conn);
+	}
+}
+
 //--------------------------------------------------------------
 
 //-------------------------AJAX---------------------------------
