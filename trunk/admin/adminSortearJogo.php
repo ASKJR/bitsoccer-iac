@@ -7,7 +7,22 @@ require("../function/mensagens.php");
 require_once("../function/data.php");
 
 	$jogos = selectJogos();
-
+	
+	if(isset($_POST["submit"])){
+		//$_POST["comboJogos"] === idJogo
+		
+		//idCompradores aptos a serem sorteados. traz do BD de dados aleatoriamente os ID's.
+		$idCompradores = sortearCompradores($_POST["comboJogos"],$_POST["qtdSorteio"]);
+		
+		//Atualiza os status do jogo para is_sorteado = TRUE;
+		atualizarStatusJogo($_POST["comboJogos"]);
+		
+		//Inserir os sorteados na tabela de sorteio
+		foreach($idCompradores as $idComprador){
+			inserirSorteio($_POST["comboJogos"],$idComprador['idComprador']);
+		}
+		
+	}
 	
 ?>
 <html>
@@ -35,8 +50,8 @@ require_once("../function/data.php");
                 <legend>Formulário</legend>
 					<form action="#" method="POST" id="formSorteio">
 						<p>
-							<label for="selectJogo">Selecione o jogo:</label>
-							<select class="validate[required]" name="selectJogo" id="selectJogo">
+							<label for="comboJogos">Selecione o jogo:</label>
+							<select class="validate[required]" name="comboJogos" id="comboJogos">
 								<option> </option>
 								<?php
 									foreach($jogos as $jogo){
@@ -54,7 +69,7 @@ require_once("../function/data.php");
 							<input class="validate[required] numSorteio" name="qtdSorteio" id="qtdSorteio"  type="text" size="6"/>
 						</p>
 						<p>
-							<input name="sortear" style="margin-left: 150px;" class="formbutton" value="Sortear" type="submit" />
+							<input name="submit" style="margin-left: 150px;" class="formbutton" value="Sortear" type="submit" />
 						</p>
 					</form>
 				</fieldset>
