@@ -1,4 +1,14 @@
-<!doctype html>
+﻿<?php
+require("../db/connection.php");
+require("../db/crud.php");
+require("../function/data.php");
+require("../function/validation.php");
+require("../function/mensagens.php");
+require_once("../function/data.php");
+
+	$jogo = selectJogosSorteadosByComprador($_GET["idComprador"]);
+	
+?>
 <html>
 <head>
 <?php include("../include.php"); ?>
@@ -21,9 +31,8 @@
         <section id="content">
 
 			<article>
-				<h2>Jogo sorteado</h2>
+				<h2>Jogo sorteado:</h2>
 				<br>
-				<p>Parabéns você foi sorteado para o seguinte jogo:</p>
 				<table cellspacing="0">
 					<tr>
 						<th>Time 1</th>
@@ -32,13 +41,23 @@
 						<th>Data</th>
 						<th>Comprovante</th>
 					</tr>
-					<tr>
-						<td>Brazil</td>
-						<td>Argentina</td>
-						<td>Curitiba</td>
-						<td>08/10/2014</td>
-						<td><img src="../img/printer-icon.png" alt="Imprimir" title="Imprimir"></td>
-					</tr>
+				<?php
+					if($jogo != null){
+						echo "<tr>";
+						echo "<td class='alignTextLeft'>"."<img src='$jogo[bandeira1]' alt='Concorrer' title='Adicionar jogo'>". "-".$jogo['selecao1'] ."</td>";
+						echo "<td class='alignTextLeft'>"."<img src='$jogo[bandeira2]' alt='Concorrer' title='Adicionar jogo'>". "-".$jogo['selecao2'] ."</td>";
+						echo "<td>" .$jogo['local']. "</td>";
+						echo "<td width='15px'>" .UserDate($jogo['data']). "</td>";
+						echo "<td><img src='../img/printer-icon.png'></td>";
+						echo "</tr>";
+					}
+					else{
+						echo "<tr>";
+						echo "<td colspan='5'>Você ainda não foi sorteado. Aguarde o sorteio! </td>";
+						echo "</tr>";
+					}
+					
+				?>
 				</table>
 			</article>
         </section>

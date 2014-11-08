@@ -141,40 +141,48 @@ function inserirCompradorJogo($idComprador,$idJogo){
 
 	global $conn;
 	
-	if(!isCompradorJogoMaximo($idComprador)){
-		if(!isCompradorJogoRepetido($idComprador,$idJogo)){
-		
-			$sql  = "INSERT INTO comprador_jogo ";
-			$sql .= "(idComprador,idJogo) ";
-			$sql .= "VALUES ($idComprador,$idJogo);";
+	if(!isSorteado($idComprador)){
+		if(!isCompradorJogoMaximo($idComprador)){
+			if(!isCompradorJogoRepetido($idComprador,$idJogo)){
 			
-			$Execute = mysqli_query($conn,$sql);
-			
-			if($Execute === false){
-				echo 'error - ';
-				echo mysqli_error($conn);
+				$sql  = "INSERT INTO comprador_jogo ";
+				$sql .= "(idComprador,idJogo) ";
+				$sql .= "VALUES ($idComprador,$idJogo);";
+				
+				$Execute = mysqli_query($conn,$sql);
+				
+				if($Execute === false){
+					echo 'error - ';
+					echo mysqli_error($conn);
+				}
+				else{
+					echo "<script type=text/javascript>
+					alert ('Parabéns.Você está concorrendo ao jogo selecionado!');
+					history.back(-1);
+					</script>";
+				}
 			}
 			else{
 				echo "<script type=text/javascript>
-				alert ('Parabéns.Você está concorrendo ao jogo selecionado!');
-				history.back(-1);
-				</script>";
+					alert ('Você já está concorrendo a esse jogo! Tente outro jogo.');
+					history.back(-1);
+					</script>";
+			
 			}
 		}
 		else{
 			echo "<script type=text/javascript>
-				alert ('Você já está concorrendo a esse jogo! Tente outro jogo.');
-				history.back(-1);
-				</script>";
-		
+					alert ('Você já está concorrendo ao número máximo de jogos. Só é permitido 3 jogos por comprador!');
+					history.back(-1);
+					</script>";
+			
 		}
 	}
 	else{
 		echo "<script type=text/javascript>
-				alert ('Você já está concorrendo ao número máximo de jogos. Só é permitido 3 jogos por comprador!');
-				history.back(-1);
-				</script>";
-		
+					alert ('Você já foi sorteado!');
+					history.back(-1);
+					</script>";
 	}
 }
 
@@ -451,6 +459,7 @@ function selectJogos(){
 }
 
 
+
 function selectJogosByComprador($idComprador){
 	
 	global $conn;
@@ -471,6 +480,31 @@ function selectJogosByComprador($idComprador){
 		}
 			mysqli_free_result($result);
 			return $rows;
+	}
+	else{
+		echo 'error - ';
+		echo mysqli_error($conn);
+	}
+}
+
+function selectJogosSorteadosByComprador($idComprador){
+	
+	global $conn;
+	
+	$sql  = "SELECT sort.*,j.*, ";
+	$sql .= "time1.selecao AS selecao1,time1.bandeira AS bandeira1, ";
+	$sql .= "time2.selecao AS selecao2, time2.bandeira AS bandeira2 ";
+	$sql .= "FROM sorteio  sort ";
+	$sql .= "INNER JOIN jogo j ON (sort.idJogo = j.idJogo) ";
+	$sql .= "INNER JOIN time time1 ON (j.idTime1 = time1.idTime)  ";  
+	$sql .= "INNER JOIN time time2 ON (j.idTime2 = time2.idTime) ";
+	$sql .= "WHERE sort.idComprador =$idComprador ";
+	
+	if ($result = mysqli_query($conn, $sql)) {
+
+		$row = mysqli_fetch_array($result);
+		mysqli_free_result($result);
+		return $row;
 	}
 	else{
 		echo 'error - ';
@@ -639,6 +673,29 @@ function sortearCompradores($idJogo,$numSorteado){
 		}
 			mysqli_free_result($result);
 			return $rows;
+	}
+	else{
+		echo 'error - ';
+		echo mysqli_error($conn);
+	}
+}
+
+function isSorteado($idComprador){
+	
+	global $conn;
+	
+	//Verificar se um comprador já foi sorteado 
+	
+	$sql  = "SELECT * FROM sorteio ";
+	$sql .= "WHERE idComprador = '$idComprador' ";
+	
+	if ($result = mysqli_query($conn, $sql)) {
+		$row_cnt = mysqli_num_rows($result);
+		if($row_cnt >= 1){
+			return true;
+		}
+		else
+			return false;
 	}
 	else{
 		echo 'error - ';
