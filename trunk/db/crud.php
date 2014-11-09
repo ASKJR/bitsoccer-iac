@@ -180,7 +180,7 @@ function inserirCompradorJogo($idComprador,$idJogo){
 	}
 	else{
 		echo "<script type=text/javascript>
-					alert ('Você já foi sorteado!');
+					alert ('Você já foi sorteado(a)!');
 					history.back(-1);
 					</script>";
 	}
@@ -496,6 +496,32 @@ function selectJogosSorteadosByComprador($idComprador){
 	$sql .= "time2.selecao AS selecao2, time2.bandeira AS bandeira2 ";
 	$sql .= "FROM sorteio  sort ";
 	$sql .= "INNER JOIN jogo j ON (sort.idJogo = j.idJogo) ";
+	$sql .= "INNER JOIN time time1 ON (j.idTime1 = time1.idTime)  ";  
+	$sql .= "INNER JOIN time time2 ON (j.idTime2 = time2.idTime) ";
+	$sql .= "WHERE sort.idComprador =$idComprador ";
+	
+	if ($result = mysqli_query($conn, $sql)) {
+
+		$row = mysqli_fetch_array($result);
+		mysqli_free_result($result);
+		return $row;
+	}
+	else{
+		echo 'error - ';
+		echo mysqli_error($conn);
+	}
+}
+
+function geraComprovante($idComprador){
+	
+	global $conn;
+	
+	$sql  = "SELECT sort.*,j.*,comp.*, ";
+	$sql .= "time1.selecao AS selecao1,time1.bandeira AS bandeira1, ";
+	$sql .= "time2.selecao AS selecao2, time2.bandeira AS bandeira2 ";
+	$sql .= "FROM sorteio  sort ";
+	$sql .= "INNER JOIN jogo j ON (sort.idJogo = j.idJogo) ";
+	$sql .= "INNER JOIN comprador comp ON (sort.idComprador = comp.idComprador) ";
 	$sql .= "INNER JOIN time time1 ON (j.idTime1 = time1.idTime)  ";  
 	$sql .= "INNER JOIN time time2 ON (j.idTime2 = time2.idTime) ";
 	$sql .= "WHERE sort.idComprador =$idComprador ";

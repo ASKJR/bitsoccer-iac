@@ -48,7 +48,7 @@ require_once("../function/data.php");
 						echo "<td class='alignTextLeft'>"."<img src='$jogo[bandeira2]' alt='Concorrer' title='Adicionar jogo'>". "-".$jogo['selecao2'] ."</td>";
 						echo "<td>" .$jogo['local']. "</td>";
 						echo "<td width='15px'>" .UserDate($jogo['data']). "</td>";
-						echo "<td><img src='../img/printer-icon.png'></td>";
+						echo "<td><a href='compradorComprovante.php'><img src='../img/printer-icon.png'></a></td>";
 						echo "</tr>";
 					}
 					else{
