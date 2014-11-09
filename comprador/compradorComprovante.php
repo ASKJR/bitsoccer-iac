@@ -21,7 +21,7 @@ require("../fpdf17/fpdf.php");
 	$pdf->Cell(184,8,'Emitido em:'.date(" H:i:s - d/M/Y"),1,1,'L');	
 	
 	$pdf->Ln(15);
-	$pdf->Cell(184,8,'Dados do comprador:',1,1,'C');	
+	$pdf->Cell(184,8,'Dados do sorteado:',1,1,'C');	
 	
 	$pdf->Cell(23,8,'Nome:',1,0,'L');
 	$pdf->SetFont('Arial','',10);
@@ -40,7 +40,7 @@ require("../fpdf17/fpdf.php");
 	
 	$pdf->SetFont('Arial','B',10);
 	$pdf->Ln(15);
-	$pdf->Cell(184,8,utf8_decode('Informações do jogo'),1,1,'C');	
+	$pdf->Cell(184,8,utf8_decode('Informações do jogo:'),1,1,'C');	
 	
 	$pdf->Cell(23,8,'Jogo:',1,0,'L');
 	
