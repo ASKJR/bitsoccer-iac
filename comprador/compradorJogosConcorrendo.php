@@ -15,7 +15,15 @@ require_once("../function/data.php");
 	}
 	//Excluindo um jogo que o comprador não deseja mais concorrer ao sorteio
 	if(isset($_GET["idCompradorJogo"])&& isset($_GET["excluir"])){
-		deleteCompradorJogoById($_GET["idCompradorJogo"]);
+		if(!isSorteado($_GET["idComprador"])){
+			deleteCompradorJogoById($_GET["idCompradorJogo"]);
+		}
+		else{
+			echo "<script type=text/javascript>
+					alert ('Não é possível deletar esse registro, pois você já foi sorteado(a).');
+					history.back (-1);
+				</script>";
+		}
 	}
 ?>
 <html>
