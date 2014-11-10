@@ -1,4 +1,14 @@
-<!doctype html>
+<?php
+require("../db/connection.php");
+require("../db/crud.php");
+require("../function/data.php");
+require("../function/validation.php");
+require("../function/mensagens.php");
+require_once("../function/data.php");
+
+	$jogos = selectJogos();
+	
+?>
 <html>
 <head>
 <?php include("../include.php"); ?>
@@ -24,25 +34,21 @@
 				<table cellspacing="0">
                 <tr>
                     <th>#ID</th>
-                    <th>Jogo</th>
+                    <th>Time1</th>
+					<th>Time2</th>
                     <th>Qtd. sorteios</th>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Brazil X Russia</td>
-                    <td>28</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>France X Alemanha</td>
-                    <td>49</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Itália X Japão</td>
-                    <td>19</td>
-                </tr>
-
+                <?php
+					foreach($jogos as $jogo){
+						echo "<tr>";
+						echo "<td>$jogo[idJogo]</td>";
+						echo "<td class='alignTextLeft'>"."<img src='$jogo[bandeira1]' alt='Concorrer' title='Adicionar jogo'>". "-".$jogo['selecao1'] ."</td>";
+						echo "<td class='alignTextLeft'>"."<img src='$jogo[bandeira2]' alt='Concorrer' title='Adicionar jogo'>". "-".$jogo['selecao2'] ."</td>";
+						$numSorteados= countIngressosSorteados($jogo['idJogo']);
+						echo "<td>$numSorteados</td>";
+						echo "</tr>";
+					}
+				?>
             </table>
 
 			</article>

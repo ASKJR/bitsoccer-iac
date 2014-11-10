@@ -729,6 +729,24 @@ function isSorteado($idComprador){
 	}
 }
 
+function countIngressosSorteados($idJogo){
+	
+	global $conn;
+	
+	
+	$sql  = "SELECT * FROM sorteio ";
+	$sql .= "WHERE idJogo = $idJogo ";
+	
+	if ($result = mysqli_query($conn, $sql)) {
+		$row_cnt = mysqli_num_rows($result);
+		return $row_cnt;
+	}
+	else{
+		echo 'error - ';
+		echo mysqli_error($conn);
+	}
+}
+
 //--------------------------------------------------------------
 
 //-------------------------AJAX---------------------------------
