@@ -29,7 +29,7 @@
 		}
 		if ($_POST['tipPesq']=='compPorJogo'){
 			$jogo = $_POST['selectJogo'];
-			$funcao = "Pesquisa/Clientes sorteados do jogo:";
+			$funcao = "Pesquisa/Clientes sorteados do jogo: ".getJogoById($jogo);
 			$compradores = adminPesquisaCompPorJogo($jogo);
 		}
 		
@@ -95,21 +95,54 @@
 					<th> CPF </th>
 					<th> RG 	</th>
 					<th> Nascimento 	</th>
-					<th> Alterar </th>
+					<!--<th> Alterar </th>-->
 				</tr>
 				<?php
 					foreach($compradores as $comprador){
 							echo "<tr>";
-							echo "<td class='alignTextLeft'>".$cliente['nome'] ."</td>";
-							echo "<td class='alignTextLeft'>".$cliente['CPF'] ."</td>";
-							echo "<td class='alignTextLeft'>".$cliente['RG'] ."</td>";
-							echo "<td class='alignTextLeft'>".$cliente['nascimento'] ."</td>";
-							echo "<td width='15px'><img src=../img/update.png>";
+							echo "<td class='alignTextLeft'>".$comprador['nome'] ."</td>";
+							echo "<td class='alignTextLeft'>".$comprador['cpf'] ."</td>";
+							echo "<td class='alignTextLeft'>".$comprador['rg'] ."</td>";
+							echo "<td class='alignTextLeft'>".userDate($comprador['nascimento']) ."</td>";
+							//echo "<td width='15px'><img src=../img/update.png>";
 							echo "</tr>"	;
 					}
-				}	
+				?>
+				</table>
+				<?php
 				}
 				
+				
+				else if ($_POST['tipPesq']=='compPorJogo'){
+				?>
+				<h2><?php echo $funcao ?></h2>
+				<br>
+				<table cellspacing="0">
+				<tr>
+					<th> Nome </th>
+					<th> CPF </th>
+					<th> RG 	</th>
+					<th> Nascimento 	</th>
+					<!--<th> Alterar </th>-->
+				</tr>
+				<?php
+					if(!$compradores){
+						echo "<td> Sem compradores Sorteados";
+					}
+					else foreach($compradores as $comprador){
+							echo "<tr>";
+							echo "<td class='alignTextLeft'>".$comprador['nome'] ."</td>";
+							echo "<td class='alignTextLeft'>".$comprador['cpf'] ."</td>";
+							echo "<td class='alignTextLeft'>".$comprador['rg'] ."</td>";
+							echo "<td class='alignTextLeft'>".userDate($comprador['nascimento']) ."</td>";
+							//echo "<td width='15px'><img src=../img/update.png>";
+							echo "</tr>"	;
+					}
+				?>
+				</table>
+				<?php
+				}
+				}
 				
 				
 				
