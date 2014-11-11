@@ -581,6 +581,31 @@ function isCompradorJogoRepetido($idComprador,$idJogo){
 	}
 }
 
+function isCpfValido($cpf){
+	
+	global $conn;
+	
+	//Verificar se já existe o CPF no BD
+	
+	$sql  = "SELECT * FROM comprador ";
+	$sql .= "WHERE cpf = '$cpf' ";
+	
+	if ($result = mysqli_query($conn, $sql)) {
+		$row_cnt = mysqli_num_rows($result);
+		if($row_cnt >= 1){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+	else{
+		echo 'error - ';
+		echo mysqli_error($conn);
+	}
+	
+}
+
 function isCompradorJogoMaximo($idComprador){
 	
 	global $conn;
