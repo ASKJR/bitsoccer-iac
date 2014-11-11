@@ -704,11 +704,13 @@ function adminPesquisaCompSort () {
 function adminPesquisaCompPorJogo ($jogo) {
 	global $conn;
 	
-	$sql  = "SELECT C.*, J.idJogo, S.* from comprador C ";
+	$sql  = "SELECT C.*, S.* from comprador C ";
 	$sql .= "INNER JOIN sorteio S ";
 	$sql .= "ON C.idComprador=S.idComprador ";
-	$sql .= "INNER JOIN JOGO J ";
-	$sql .= "ON S.idJogo=".$jogo;
+	$sql .= "AND S.idJogo =".$jogo;
+	
+	
+	$rows = null;
 	
 	if ($result = mysqli_query($conn, $sql)){
 		while ($row = mysqli_fetch_array($result)){
