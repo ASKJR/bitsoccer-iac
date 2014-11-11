@@ -474,7 +474,7 @@ function selectJogosByComprador($idComprador){
 	$sql .= "WHERE c_j.idComprador =$idComprador; "; 
 	
 	if ($result = mysqli_query($conn, $sql)) {
-
+		$rows = null;
 		while ($row = mysqli_fetch_array($result)) {
 			$rows[]= $row;
 		}
@@ -685,7 +685,7 @@ function sortearCompradores($idJogo,$numSorteado){
 	//Pega os compradores da tabela comprador_jogo de forma aleatória que estejam concorrendo a
 	//um determinado jogo que vai sorteado pelo ADMIN;
 	
-	$sql  = "SELECT * FROM comprador_jogo ";
+	$sql  = "SELECT idComprador FROM comprador_jogo ";
 	$sql .= "WHERE idJogo = $idJogo ";
 	$sql .= "AND idComprador NOT IN (SELECT idComprador FROM sorteio) ";
 	$sql .= "ORDER BY RAND() ";
@@ -693,9 +693,9 @@ function sortearCompradores($idJogo,$numSorteado){
 	
 	
 	if ($result = mysqli_query($conn, $sql)) {
-
+		$rows = null;
 		while ($row = mysqli_fetch_array($result)) {
-			$rows[]= $row;
+			$rows []= $row;
 		}
 			mysqli_free_result($result);
 			return $rows;

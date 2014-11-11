@@ -5,6 +5,7 @@ require("../function/data.php");
 require("../function/validation.php");
 require("../function/mensagens.php");
 require_once("../function/data.php");
+
 	
 	$jogos = selectJogosByComprador($_SESSION["idComprador"]);
 	
@@ -62,6 +63,7 @@ require_once("../function/data.php");
 					</tr>
 					<tr>
 					<?php
+					if($jogos != null){
 						foreach($jogos as $jogo){
 							echo "<tr>";
 							echo "<td class='alignTextLeft'>"."<img src='$jogo[bandeira1]' alt='Concorrer' title='Adicionar jogo'>". "-".$jogo['selecao1'] ."</td>";
@@ -71,6 +73,10 @@ require_once("../function/data.php");
 							echo "<td>" ."<a href='compradorJogosConcorrendo.php?idComprador=".$_SESSION["idComprador"]."&idCompradorJogo=".$jogo['idCompradorJogo']."&excluir=true"."'>"."<img src='../img/excluir.png' alt='Excluir jogo' title='Excluir jogo'>"."</a>"."</td>";
 							echo "</tr>";
 						}
+					}
+					else{
+						echo "<tr><td colspan='5'> Você não está concorrendo a nenhum jogo ainda.</td></tr>";
+					}
 					?>	
 					</tr>
 				</table>

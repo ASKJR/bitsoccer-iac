@@ -13,15 +13,26 @@ require_once("../function/data.php");
 		
 		//idCompradores aptos a serem sorteados. traz do BD de dados aleatoriamente os ID's.
 		$idCompradores = sortearCompradores($_POST["comboJogos"],$_POST["qtdSorteio"]);
-		
-		//Atualiza os status do jogo para is_sorteado = TRUE;
-		atualizarStatusJogo($_POST["comboJogos"]);
-		
-		//Inserir os sorteados na tabela de sorteio
-		foreach($idCompradores as $idComprador){
-			inserirSorteio($_POST["comboJogos"],$idComprador['idComprador']);
+	
+			
+		if($idCompradores != null){
+			//Atualiza os status do jogo para is_sorteado = TRUE;
+			atualizarStatusJogo($_POST["comboJogos"]);
+			//Inserir os sorteados na tabela de sorteio
+			foreach($idCompradores as $idComprador){
+				inserirSorteio($_POST["comboJogos"],$idComprador['idComprador']);
+			}
+			echo "<script type=text/javascript>
+					alert ('O sorteio foi realizado com sucesso!!');
+					history.back();
+				</script>";
 		}
+		else{
+			echo "<script type=text/javascript>
+					alert ('Não foi possível realizar o sorteio. Não há compradores aptos para esse jogo.');
+				</script>";
 		
+		}
 	}
 	
 ?>

@@ -19,7 +19,7 @@
         <section id="content">
 
 			<article>
-				<h2>Estatísticas...</h2>
+				<h2>Bem-Vindo, administrador!</h2>
 
 			</article>
         </section>
