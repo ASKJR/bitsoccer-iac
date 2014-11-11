@@ -13,7 +13,7 @@ require("./function/mensagens.php");
 			$_POST["cep"],$_POST["logradouro"],$_POST["bairro"],$_POST["cidade"],$_POST["estado"],$_POST["numero"],
 			$_POST["email"],$_POST["password"]
 		);
-		if(isFormValido($required)){
+		if(isFormValido($required) && isCpfValido($_POST["cpf"])){
 			//Inserindo nas tabelas Comprador,Enderço,Usuário. A associação entre as tabelas é dada pelo idComprador.	
 			inserirComprador($_POST["nome"],$_POST["cpf"],$_POST["rg"],$_POST["nascimento"]);
 			inserirEndereco ($_POST["cep"],$_POST["logradouro"],$_POST["bairro"],$_POST["cidade"],$_POST["estado"],$_POST["numero"]);

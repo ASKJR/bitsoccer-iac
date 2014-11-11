@@ -25,7 +25,7 @@ require("../fpdf17/fpdf.php");
 	
 	$pdf->Cell(23,8,'Nome:',1,0,'L');
 	$pdf->SetFont('Arial','',10);
-	$pdf->Cell(161,8,$fill['nome'],1,1,'L');
+	$pdf->Cell(161,8,utf8_decode($fill['nome']),1,1,'L');
     
 	$pdf->SetFont('Arial','B',10);
 	$pdf->Cell(23,8,'CPF:',1,0,'L');
@@ -45,7 +45,7 @@ require("../fpdf17/fpdf.php");
 	$pdf->Cell(23,8,'Jogo:',1,0,'L');
 	
 	$pdf->SetFont('Arial','',10);
-	$pdf->Cell(161,8,$fill['selecao1'].' X '.$fill['selecao2'],1,1,'L');
+	$pdf->Cell(161,8,utf8_decode($fill['selecao1']).' X '.utf8_decode($fill['selecao2']),1,1,'L');
 	
 	
 	$pdf->SetFont('Arial','B',10);
