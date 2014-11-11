@@ -11,6 +11,7 @@
 	$sql .= "FROM jogo j "; 												
 	$sql .= "INNER JOIN time time1 ON (j.idTime1 = time1.idTime)  ";  
 	$sql .= "INNER JOIN time time2 ON (j.idTime2 = time2.idTime) ";
+	$sql .= "WHERE j.is_sorteado=true ";
 	$ress = mysqli_query($conn, $sql);
 	
 	
@@ -59,6 +60,7 @@
 
 			<article>
 				<?php if(isset($_POST['submit'])) {
+					//********************* PESQUISA POR JOGO NÃO SORTEADO ************************************************
 					if ($_POST['tipPesq']=='jogoNaoSort' || $_POST['tipPesq']=='jogoSort'){
 				?>
 				<h2><?php echo $funcao ?></h2>
