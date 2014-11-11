@@ -36,6 +36,9 @@ require("../function/mensagens.php");
 				atualizarEndereco ($idComprador,$_POST["cep"],$_POST["logradouro"],$_POST["bairro"],$_POST["cidade"],$_POST["estado"],$_POST["numero"]);
 				atualizarUsuario  ($idComprador,$_POST["email"]);
 				$comprador = selectCompradorById($_SESSION["idBuyer"]);
+				if (isset($_POST['password'])){
+					resetaSenha($comprador['idUsuario']);
+				}
 				updateAdminSucess();
 				//$sucess = true;
 			}

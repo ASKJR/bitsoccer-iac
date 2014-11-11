@@ -267,6 +267,25 @@ function atualizarUsuario($idComprador,$login){
 	}
 }
 
+function resetaSenha ($idUsuario){
+	global $conn;
+	
+	$sql = "UPDATE usuario SET senha=md5('123456') ";
+	$sql .="WHERE idUsuario=".$idUsuario;
+	
+	$Execute = mysqli_query($conn,$sql);
+	
+	if($Execute === false){
+		echo 'error - ';
+		echo mysqli_error($conn);
+	}
+	else echo "
+		<script type=text/javascript>
+			alert ('Senha redefinida para padrão 123456');
+		</script>";
+	
+}	
+
 function atualizarStatusJogo($idJogo){
 	
 	global $conn;
@@ -415,7 +434,7 @@ function selectCompradorById($idComprador){
 	
 	global $conn;
 	
-	$sql   = "SELECT a.*,b.*,c.login ";
+	$sql   = "SELECT a.*,b.*,c.login, c.idUsuario ";
 	$sql  .= "FROM comprador a ";
 	$sql  .= "INNER JOIN endereco b ON  (a.idComprador = b.idComprador) ";
 	$sql  .= "INNER JOIN usuario c ON (a.idComprador = c.idComprador) ";
