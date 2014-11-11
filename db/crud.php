@@ -683,8 +683,9 @@ function adminPesquisaJogoSort () {
 function adminPesquisaCompSort () {
 	global $conn;
 	
-	$sql  = "SELECT * from comprador ";
-	$sql .= "WHERE is_sorteado=1;";
+	$sql  = "SELECT * from comprador C ";
+	$sql  .= "INNER JOIN sorteio S ";
+	$sql .= "WHERE C.idComprador = S.idComprador;";
 	
 	if ($result = mysqli_query($conn, $sql)){
 		while ($row = mysqli_fetch_array($result)){
@@ -703,8 +704,11 @@ function adminPesquisaCompSort () {
 function adminPesquisaCompPorJogo ($jogo) {
 	global $conn;
 	
-	$sql  = "SELECT * from comprador ";
-	$sql .= "WHERE is_sorteado=1;";
+	$sql  = "SELECT C.*, J.idJogo, S.* from comprador C ";
+	$sql .= "INNER JOIN sorteio S ";
+	$sql .= "ON C.idComprador=S.idComprador ";
+	$sql .= "INNER JOIN JOGO J ";
+	$sql .= "ON S.idJogo=".$jogo;
 	
 	if ($result = mysqli_query($conn, $sql)){
 		while ($row = mysqli_fetch_array($result)){
@@ -720,6 +724,24 @@ function adminPesquisaCompPorJogo ($jogo) {
 	
 }
 
+function getJogoById ($idJogo) {
+	global $conn;
+
+	$sql  = "SELECT j.*, ";
+	$sql .= "time1.selecao AS selecao1,time1.bandeira AS bandeira1, ";
+	$sql .= "time2.selecao AS selecao2, time2.bandeira AS bandeira2 ";
+	$sql .= "FROM jogo j "; 												
+	$sql .= "INNER JOIN time time1 ON (j.idTime1 = time1.idTime)  ";  
+	$sql .= "INNER JOIN time time2 ON (j.idTime2 = time2.idTime) ";
+	$sql .= "WHERE idJogo=".$idJogo;
+	
+	$result = mysqli_query($conn, $sql);
+	$row = mysqli_fetch_array($result);
+	
+	$jogo = $row['selecao1']." X ".$row['selecao2'];
+	return $jogo;
+	
+}
 
 //Retorna os compradores sorteados
 function sortearCompradores($idJogo,$numSorteado){
