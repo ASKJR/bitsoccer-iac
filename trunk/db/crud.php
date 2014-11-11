@@ -686,6 +686,7 @@ function adminPesquisaCompSort () {
 	$sql  = "SELECT * from comprador C ";
 	$sql  .= "INNER JOIN sorteio S ";
 	$sql .= "WHERE C.idComprador = S.idComprador;";
+	$sql .= "ORDER BY C.nome";
 	
 	if ($result = mysqli_query($conn, $sql)){
 		while ($row = mysqli_fetch_array($result)){
@@ -708,6 +709,7 @@ function adminPesquisaCompPorJogo ($jogo) {
 	$sql .= "INNER JOIN sorteio S ";
 	$sql .= "ON C.idComprador=S.idComprador ";
 	$sql .= "AND S.idJogo =".$jogo;
+	$sql .= " ORDER BY C.nome";
 	
 	
 	$rows = null;
