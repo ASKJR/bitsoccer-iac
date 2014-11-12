@@ -683,10 +683,10 @@ function adminPesquisaJogoSort () {
 function adminPesquisaCompSort () {
 	global $conn;
 	
-	$sql  = "SELECT * from comprador C ";
+	$sql   = "SELECT * from comprador C ";
 	$sql  .= "INNER JOIN sorteio S ";
-	$sql .= "WHERE C.idComprador = S.idComprador;";
-	$sql .= "ORDER BY C.nome";
+	$sql  .= "WHERE C.idComprador = S.idComprador ";
+	$sql  .= "ORDER BY C.nome ";
 	
 	if ($result = mysqli_query($conn, $sql)){
 		while ($row = mysqli_fetch_array($result)){
