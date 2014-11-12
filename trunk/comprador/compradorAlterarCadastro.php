@@ -8,8 +8,8 @@ require("../function/mensagens.php");
 	$sucess="";
 	
 	//Traz para o formulário os dados previamente cadastrados no BD.
-	if($_GET["idComprador"] != ""){ 
-		$comprador = selectCompradorById($_GET["idComprador"]);
+	if(isset($_SESSION["idComprador"])){ 
+		$comprador = selectCompradorById($_SESSION["idComprador"]);
 	}
 	
 	//Caso o comprador realize alguma alteração
@@ -20,7 +20,7 @@ require("../function/mensagens.php");
 		$_POST["email"]
 		);
 		if(isFormValido($required)){
-			$idComprador = trim($_GET["idComprador"]);
+			$idComprador = trim($_SESSION["idComprador"]);
 			//Atualizando as tabelas
 			if($idComprador != ""){
 				atualizarComprador($idComprador,$_POST["nome"],$_POST["cpf"],$_POST["rg"],$_POST["nascimento"]);
@@ -58,7 +58,7 @@ require("../function/mensagens.php");
 			<article>
 				<h2> Cadastro do usuário:</h2>
 			<br>
-			<form action="compradorAlterarCadastro.php?idComprador<?= '='.$_GET["idComprador"]?>" method="POST" id="formCadastroUser">
+			<form action="compradorAlterarCadastro.php" method="POST" id="formCadastroUser">
 				<fieldset>
 					<legend>Dados pessoais:</legend>
 					<br>

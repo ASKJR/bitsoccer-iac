@@ -5,8 +5,9 @@
 	require("../function/validation.php");
 	require("../function/mensagens.php");
 	$funcao ="";
-	$usuId = $_GET['idComprador'];
-	
+	if(isset($_SESSION["idComprador"])){
+		$usuId = $_SESSION["idComprador"];
+	}
 	
 	if (isset($_GET["submit"])) {
 		if ($_GET['tipPesq']=='jogoNaoSort'){

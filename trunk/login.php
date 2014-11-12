@@ -15,7 +15,7 @@ require("./function/mensagens.php");
 					exit;
 				}
 				else if($_SESSION["usuario"] === "comprador"){
-					header("Location: /comprador/compradorHome.php?idComprador=".$_SESSION["idComprador"]);
+					header("Location: /comprador/compradorHome.php");
 					exit;
 				}
 			}

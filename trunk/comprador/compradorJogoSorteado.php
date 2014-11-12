@@ -6,8 +6,9 @@ require("../function/validation.php");
 require("../function/mensagens.php");
 require_once("../function/data.php");
 
-	$jogo = selectJogosSorteadosByComprador($_GET["idComprador"]);
-	
+	if(isset($_SESSION["idComprador"])){
+		$jogo = selectJogosSorteadosByComprador($_SESSION["idComprador"]);
+	}
 ?>
 <html>
 <head>
