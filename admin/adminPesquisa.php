@@ -170,7 +170,6 @@
 							<input  id="compPorJogo" name="tipPesq" type="radio" value="compPorJogo"/>
 							&nbsp;&nbsp;&nbsp;<span id="teste">Jogo: </span> 
 							<select name="selectJogo" id="selectJogo">
-								<option> </option> 
 								<?php while ($row = mysqli_fetch_row($ress)){
 									echo "<option value=".$row['0'].">".$row['8']." X ".$row['10']."</option>";
 								}
