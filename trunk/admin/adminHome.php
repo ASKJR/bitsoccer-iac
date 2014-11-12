@@ -1,4 +1,11 @@
-<!doctype html>
+<?php
+require("../db/connection.php");
+require("../db/crud.php");
+require("../function/data.php");
+require("../function/validation.php");
+require("../function/mensagens.php");
+require_once("../function/data.php");
+?>
 <html>
 <head>
 <?php include("../include.php"); ?>

@@ -9,6 +9,12 @@
 	else{
 		$path=".";
 	}
+	//Verificando se o usuario está logado,caso contrário redirecionara para index.
+	if($dir ==="C:\Webserver\wamp\www\comprador" || $dir ==="C:\Webserver\wamp\www\admin"){
+		if(!isset($_SESSION['usuario'])){
+			header("Location: /login.php");
+		}
+	}
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>bitsoccer</title>

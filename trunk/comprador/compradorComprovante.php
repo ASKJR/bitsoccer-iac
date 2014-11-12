@@ -6,6 +6,10 @@ require("../function/validation.php");
 require("../function/mensagens.php");
 require_once("../function/data.php");
 require("../fpdf17/fpdf.php");
+	
+	if(!isset($_SESSION['usuario'])){
+		header("Location: /login.php");
+	}
 
 	$fill = geraComprovante($_SESSION["idComprador"]);
 	//var_dump($fill);
