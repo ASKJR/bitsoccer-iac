@@ -12,10 +12,10 @@
 ?>
 <ul>
 	<li  class="<?=$classCompradorHome?>">
-		<a href="compradorHome.php?idComprador=<?=$_GET["idComprador"]?>">Home</a>
+		<a href="compradorHome.php">Home</a>
 	</li>
    	<li  class="<?=$classCompradorPesquisa?>">
-		<a href="compradorPesquisa.php?idComprador=<?=$_GET["idComprador"]?>">Pesquisa</a>
+		<a href="compradorPesquisa.php">Pesquisa</a>
 	</li>
  	<li class="end">
 		<a href="../logout.php">Logout</a>
