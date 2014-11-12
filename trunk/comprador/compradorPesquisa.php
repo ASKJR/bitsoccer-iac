@@ -8,12 +8,12 @@
 	$usuId = $_GET['idComprador'];
 	
 	
-	if (isset($_POST["submit"])) {
-		if ($_POST['tipPesq']=='jogoNaoSort'){
+	if (isset($_GET["submit"])) {
+		if ($_GET['tipPesq']=='jogoNaoSort'){
 			$funcao = "Pesquisa/Jogos não sorteados";
 			$jogos = adminPesquisaJogoNaoSort();
 		}
-		else if ($_POST['tipPesq']=='jogoSort'){
+		else if ($_GET['tipPesq']=='jogoSort'){
 			$funcao = "Pesquisa/Jogos sorteados";
 			$jogos = adminPesquisaJogoSort();
 		}
@@ -47,9 +47,9 @@
 
 			<article>
 			<?php
-				if (isset($_POST['submit'])){
+				if (isset($_GET['submit'])){
 					// ***************************** JOGO SORTEADO OU NÃO SORTEADO *****************************************
-					if ($_POST['tipPesq']=='jogoNaoSort' || $_POST['tipPesq']=='jogoSort'){
+					if ($_GET['tipPesq']=='jogoNaoSort' || $_GET['tipPesq']=='jogoSort'){
 						?>
 						<h2><?php echo $funcao ?></h2>
 						<br>
@@ -60,7 +60,7 @@
 							<th> Local 	</th>
 							<th> Data 	</th>
 							<?php
-							if ($_POST['tipPesq']=='jogoNaoSort') 
+							if ($_GET['tipPesq']=='jogoNaoSort') 
 								echo "<th> Concorrer </th>";
 								else echo "<th> Horário </th>";
 							?>
@@ -72,7 +72,7 @@
 								echo "<td class='alignTextLeft'>"."<img src='$jogo[bandeira2]' alt='Concorrer' title='Adicionar jogo'>". "-".$jogo['selecao2'] ."</td>";
 								echo "<td>" .$jogo['local']. "</td>";
 								echo "<td width='15px'>" .UserDate($jogo['data']). "</td>";
-								if ($_POST['tipPesq']=='jogoNaoSort') 
+								if ($_GET['tipPesq']=='jogoNaoSort') 
 								echo "<td>" ."<a href='compradorJogosConcorrendo.php?idComprador=".$_SESSION["idComprador"]."&idJogo=".$jogo['idJogo']."'>"."<img src='../img/adicionar.png' alt='Concorrer' title='Adicionar jogo'>"."</a>"."</td>";
 								else echo "<td width='15px'>" .$jogo['horario']. "</td>";
 								echo "</tr>"	;
@@ -90,8 +90,9 @@
 				<h2>Pesquisa</h2>
 				<fieldset>
 					<legend>Search</legend>
-					<form action="compradorPesquisa.php?idComprador=<?php echo $usuId?>" method="POST">
+					<form action="compradorPesquisa.php" method="GET">
 						<p>
+							<input name="idComprador" value="<?= $usuId?>"   type="hidden">
 							<label class="lbSearch">Jogos não sorteados:</label>
 							<input name="tipPesq" value="jogoNaoSort"   type="radio" checked/>
 						</p>
@@ -100,7 +101,7 @@
 							<input name="tipPesq" value="jogoSort"   type="radio"/>
 						</p>
 						<p>
-							<input name="submit" style="margin-left: 150px;" class="formbutton" value="pesquisar" type="submit" />
+							<input name="submit" style="margin-left: 150px;" class="formbutton" value="Pesquisar" type="submit" />
 						</p>
 					</form>
 				</fieldset>
