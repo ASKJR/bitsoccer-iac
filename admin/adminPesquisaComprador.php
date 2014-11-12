@@ -1,4 +1,11 @@
 <?php
+require("../db/connection.php");
+require("../db/crud.php");
+require("../function/data.php");
+require("../function/validation.php");
+require("../function/mensagens.php");
+require_once("../function/data.php");
+
 if(isset($_SESSION["idBuyer"])){
 	unset($_SESSION["idBuyer"]);
 }
