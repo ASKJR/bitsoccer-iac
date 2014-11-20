@@ -106,8 +106,13 @@ function inserirJogo ($tim1_id, $tim2_id, $data, $horario, $local, $maxIng){
 	$query .= "WHERE idTime1=".$tim1_id." AND idTime2=".$tim2_id.";";
 	$result = mysqli_query($conn, $query);
 	$row = mysqli_fetch_row($result);
+	
+	$query2 = "SELECT * FROM jogo ";
+	$query2 .= "WHERE idTime1=".$tim2_id." AND idTime2=".$tim1_id.";";
+	$result = mysqli_query($conn, $query2);
+	$row2 = mysqli_fetch_row($result);
 	//se $row for diferente de false, o jogo ja está cadastrado!!
-	if(!$row) {
+	if(!$row && !$row2) {
 	
 		$sql = "INSERT INTO jogo ";
 		$sql .= "(idTime1, idTime2, local, data, horario, maxIngresso) VALUES ";
@@ -223,8 +228,8 @@ function atualizarComprador($idComprador,$nome,$cpf,$rg,$nascimento){
 	
 	if($Execute === false){
 		echo 'error - ';
-		echo mysqli_error($conn);
 	}
+		echo mysqli_error($conn);
 
 }
 
@@ -304,6 +309,51 @@ function atualizarStatusJogo($idJogo){
 		echo mysqli_error($conn);
 	}
 }
+
+function alteraJogo ($idJogo, $data, $horario, $local, $maxIngresso) {
+	global $conn;
+	
+	$sql  = "UPDATE jogo set data='".$data."', horario='".$horario;
+	$sql .= "', local='".$local."', maxIngresso='".$maxIngresso."' ";
+	$sql .= "WHERE idJogo=".$idJogo;
+	
+	$Execute = mysqli_query($conn,$sql);
+	
+	if($Execute === false){
+		echo 'error - ';
+		echo mysqli_error($conn);
+	}
+	else echo "
+		<script type=text/javascript>
+			alert ('Jogo alterado com sucesso!!');
+			window.location.href = 'adminPesquisa.php';
+		</script>";
+
+}
+
+function alteraTime ($idTime, $selecao, $bandeira) {
+	global $conn;
+	
+	$sql  = "UPDATE time set selecao='".$selecao."', bandeira='".$bandeira;
+	$sql .= "' WHERE idTime=".$idTime;
+	$exec = mysqli_query($conn,$sql);
+	if ($exec === false){
+		echo "
+		<script type=text/javascript>
+			alert ('O jogo não pode ser alterado');
+			window.location.href = 'adminPesquisa.php';
+		</script>";
+	}
+	else {
+		echo "
+		<script type=text/javascript>
+			alert ('O jogo foi alterado com sucesso!!');
+			window.location.href = 'adminPesquisa.php';
+		</script>";
+	}
+
+
+}
 //--------------------------------------------------------------
 
 
@@ -352,6 +402,43 @@ function deleteCompradorJogoById($idCompradorJogo){
 
 }
 
+function deleteJogo ( $id) {
+	global $conn;
+	$sql  = "DELETE from jogo ";
+	$sql .= "WHERE idJogo =".$id;
+	
+	if (mysqli_query($conn, $sql)){
+		echo "<script type=text/javascript>
+				alert ('Jogo deletado com sucesso!');
+				history.back(-1);
+			</script>";
+			}
+	else {
+		echo "<script type=text/javascript>
+				alert ('O jogo nao pode ser excluido pois ja possui clientes concorrendo');
+				history.back(-1);
+			</script>";
+	}
+}
+
+function deleteTime ($id) {
+	global $conn;
+	$sql  = "DELETE from time ";
+	$sql .= "WHERE idTime =".$id;
+	
+	if (mysqli_query($conn, $sql)){
+		echo "<script type=text/javascript>
+				alert ('Time deletado com sucesso!');
+				window.location.href = adminHome.php';
+			</script>";
+			}
+	else {
+		echo "<script type=text/javascript>
+				alert ('O Time nao pode ser excluido pois ja esta cadastrado em algum jogo');
+				window.location.href = 'adminHome.php';
+			</script>";
+	}
+}
 
 //----------------------------SELECT----------------------------
 
@@ -728,6 +815,8 @@ function adminPesquisaCompPorJogo ($jogo) {
 	
 }
 
+
+//Passando o ID retorna o JOGO (ex: brasil X espanha)
 function getJogoById ($idJogo) {
 	global $conn;
 
