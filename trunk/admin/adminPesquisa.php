@@ -71,7 +71,7 @@
 					<th> Time 2 </th>
 					<th> Local 	</th>
 					<th> Data 	</th>
-					<th> Alterar </th>
+					<?php if ($_POST['tipPesq']=='jogoNaoSort') echo "<th> Alterar </th>";?>
 				</tr>
 				<?php
 					foreach($jogos as $jogo){
@@ -80,7 +80,8 @@
 							echo "<td class='alignTextLeft'>"."<img src='$jogo[bandeira2]' alt='Concorrer' title='Adicionar jogo'>". "-".$jogo['selecao2'] ."</td>";
 							echo "<td>" .$jogo['local']. "</td>";
 							echo "<td width='15px'>" .UserDate($jogo['data']). "</td>";
-							echo "<td width='15px'><img src=../img/update.png>";
+							if ($_POST['tipPesq']=='jogoNaoSort')
+							echo "<td width='15px'><a href=adminCRUDJogo.php?idJogo=".$jogo['idJogo']."><img src=../img/update.png></a>";
 							echo "</tr>"	;
 					}
 				?>
