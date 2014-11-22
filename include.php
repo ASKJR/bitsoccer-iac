@@ -10,10 +10,16 @@
 		$path=".";
 	}
 	//Verificando se o usuario está logado,caso contrário redirecionara para index.
-	if($dir ==="C:\Webserver\wamp\www\comprador" || $dir ==="C:\Webserver\wamp\www\admin"){
-		if(!isset($_SESSION['usuario'])){
+	if($dir ==="C:\Webserver\wamp\www\comprador"){
+		if(!isset($_SESSION['usuario'])|| $_SESSION["usuario"] != "comprador"){
 			header("Location: /login.php");
 		}
+	}
+	if($dir ==="C:\Webserver\wamp\www\admin"){
+		if(!isset($_SESSION['usuario'])|| $_SESSION["usuario"] != "admin"){
+			header("Location: /login.php");
+		}
+	
 	}
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
