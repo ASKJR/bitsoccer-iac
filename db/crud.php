@@ -835,6 +835,21 @@ function getJogoById ($idJogo) {
 	return $jogo;
 	
 }
+//verifica quantidade de ingressos
+function quantidadeIngressos ($id){
+	global $conn;
+	$sql  = "SELECT * FROM jogo ";
+	$sql .= "WHERE idJogo=".$id;
+	
+	if ($result = mysqli_query($conn, $sql)){
+		$row = null;
+		$row = mysqli_fetch_array($result);
+		return $row['maxIngresso'];
+	}
+}
+
+
+
 
 //Retorna os compradores sorteados
 function sortearCompradores($idJogo,$numSorteado){
