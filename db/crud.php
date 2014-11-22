@@ -396,7 +396,7 @@ function deleteCompradorJogoById($idCompradorJogo){
 	else{
 		echo "<script type=text/javascript>
 			alert ('Jogo deletado com sucesso!');
-			history.back(-1);
+			window.location.href = 'adminPesquisa.php';
 			</script>";
 	}
 
@@ -410,13 +410,13 @@ function deleteJogo ( $id) {
 	if (mysqli_query($conn, $sql)){
 		echo "<script type=text/javascript>
 				alert ('Jogo deletado com sucesso!');
-				history.back(-1);
+				window.location.href = 'adminPesquisa.php';
 			</script>";
 			}
 	else {
 		echo "<script type=text/javascript>
 				alert ('O jogo nao pode ser excluido pois ja possui clientes concorrendo');
-				history.back(-1);
+				window.location.href = 'adminPesquisa.php';
 			</script>";
 	}
 }
